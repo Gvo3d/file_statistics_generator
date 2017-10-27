@@ -1,7 +1,7 @@
 package org.yakimovdenis.console.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,9 +9,8 @@ import org.yakimovdenis.console.model.FileStatistics;
 import org.yakimovdenis.console.support.FileStatisticsRowMapper;
 import org.yakimovdenis.console.support.LineStatisticsRowMapper;
 import org.yakimovdenis.console.support.QueryConstants;
-import org.yakimovdenis.statistics.LineStatisticsResult;
+import org.yakimovdenis.stats.LineStatisticsResult;
 
-import javax.management.Query;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

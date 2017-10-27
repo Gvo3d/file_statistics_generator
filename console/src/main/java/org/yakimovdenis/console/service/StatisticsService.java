@@ -1,7 +1,6 @@
 package org.yakimovdenis.console.service;
 
 import org.yakimovdenis.console.model.FileStatistics;
-import org.yakimovdenis.statistics.LineStatisticsResult;
 
 import java.io.File;
 import java.util.List;

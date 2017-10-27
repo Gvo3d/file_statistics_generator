@@ -1,2 +1,4 @@
 rootProject.name = 'statsgen'
 include 'statistics'
+include 'web-server'
+include 'console'

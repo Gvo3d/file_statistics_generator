@@ -2,7 +2,7 @@ package org.yakimovdenis.console.support;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
-import org.yakimovdenis.statistics.LineStatisticsResult;
+import org.yakimovdenis.stats.LineStatisticsResult;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

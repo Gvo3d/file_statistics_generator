@@ -1,8 +1,7 @@
 package org.yakimovdenis.console.model;
 
 import lombok.Data;
-import lombok.Setter;
-import org.yakimovdenis.statistics.LineStatisticsResult;
+import org.yakimovdenis.stats.LineStatisticsResult;
 
 import java.util.Date;
 import java.util.List;

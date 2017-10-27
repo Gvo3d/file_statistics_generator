@@ -1,4 +1,4 @@
-package org.yakimovdenis.statistics;
+package org.yakimovdenis.stats;
 
 import lombok.Data;
 

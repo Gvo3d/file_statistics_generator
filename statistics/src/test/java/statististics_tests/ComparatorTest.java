@@ -1,7 +1,7 @@
 package statististics_tests;
 
 import org.junit.Test;
-import org.yakimovdenis.statistics.StringLengthComparator;
+import org.yakimovdenis.stats.StringLengthComparator;
 
 import static org.junit.Assert.*;
 
