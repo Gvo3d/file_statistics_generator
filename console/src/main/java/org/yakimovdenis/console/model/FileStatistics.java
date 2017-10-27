@@ -9,7 +9,6 @@ import java.util.List;
 
 @Data
 public class FileStatistics {
-    @Setter
     private Integer id;
     private String fileName;
     private Date fileUploadDate;
@@ -19,5 +18,8 @@ public class FileStatistics {
         this.fileName = fileName;
         this.fileUploadDate = new Date(System.currentTimeMillis());
         this.lineStatistics = lineStatistics;
+    }
+
+    public FileStatistics() {
     }
 }

@@ -30,17 +30,20 @@
             <column name="id" type="SERIAL" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="line" type="varchar(2000)">
+                <constraints nullable="false"/>
+            </column>
             <column name="longest_word" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="shortest_word" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="average_word_length" type="real">
+                <constraints nullable="false"/>
+            </column>
             <column name="file_id" type="int">
                 <constraints nullable="false" foreignKeyName="fk_line_to_file" references="files(id)"/>
-            </column>
-            <column name="enabled" type="real">
-                <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>

@@ -10,7 +10,7 @@ public class LineStatisticsResult {
     private String shortestWord;
     private float averageWordLength;
 
-    LineStatisticsResult(String line, String longestWord, String shortestWord, float averageWordLength) {
+    public LineStatisticsResult(String line, String longestWord, String shortestWord, float averageWordLength) {
         this.line = line;
         this.longestWord = longestWord;
         this.shortestWord = shortestWord;
