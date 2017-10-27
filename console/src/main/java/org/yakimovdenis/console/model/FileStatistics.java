@@ -13,12 +13,10 @@ public class FileStatistics {
     private Integer id;
     private String fileName;
     private Date fileUploadDate;
-    private String fileData;
     private List<LineStatisticsResult> lineStatistics;
 
-    public FileStatistics(String fileName, String fileData, List<LineStatisticsResult> lineStatistics) {
+    public FileStatistics(String fileName, List<LineStatisticsResult> lineStatistics) {
         this.fileName = fileName;
-        this.fileData = fileData;
         this.fileUploadDate = new Date(System.currentTimeMillis());
         this.lineStatistics = lineStatistics;
     }

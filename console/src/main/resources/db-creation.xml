@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="creation" author="dyakimov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="files" />
+            </not>
+            <not>
+                <tableExists tableName="line_statistics" />
+            </not>
+        </preConditions>
+
+        <createTable tableName="files">
+            <column name="id" type="SERIAL" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="filename" type="varchar(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="DATETIME" valueDate="${now}"/>
+        </createTable>
+
+        <createTable tableName="line_statistics">
+            <column name="id" type="SERIAL" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="longest_word" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="shortest_word" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="file_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_line_to_file" references="files(id)"/>
+            </column>
+            <column name="enabled" type="real">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
