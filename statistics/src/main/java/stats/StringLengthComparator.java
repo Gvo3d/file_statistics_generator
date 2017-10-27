@@ -5,7 +5,7 @@ import java.util.Comparator;
 public class StringLengthComparator implements Comparator<String> {
     private boolean min;
 
-    StringLengthComparator(boolean getMinimalLength) {
+    public StringLengthComparator(boolean getMinimalLength) {
         this.min = getMinimalLength;
     }
 

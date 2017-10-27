@@ -2,7 +2,7 @@ package statististics_tests;
 
 import org.junit.Test;
 import stats.LineStatisticsResult;
-import stats.StaticticsFileReader;
+import stats.StatisticsFileReader;
 
 import java.io.File;
 import java.nio.file.NoSuchFileException;
@@ -19,6 +19,7 @@ public class FilesTest {
 
     @Test
     public void NormalTestWithLastEmptyLine() throws NoSuchFileException {
+        //Real file length is 12
         doTest("normal_test_with_last_empty_line.txt", 11);
     }
 
@@ -29,6 +30,7 @@ public class FilesTest {
 
     @Test
     public void EmptyLinesTest() throws NoSuchFileException {
+        //Real file length is 13
         doTest("empty_lines_test.txt", 12);
     }
 
@@ -46,8 +48,8 @@ public class FilesTest {
         } catch (NullPointerException e) {
             file = new File(fileName);
         }
-        StaticticsFileReader statisticsReader = new StaticticsFileReader();
-        List<LineStatisticsResult> results = null;
+        StatisticsFileReader statisticsReader = new StatisticsFileReader();
+        List<LineStatisticsResult> results;
         results = statisticsReader.resolveFile(file);
         assertNotNull(results);
         System.out.println("STATISTICS for " + fileName);

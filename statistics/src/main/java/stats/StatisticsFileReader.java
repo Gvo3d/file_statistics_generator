@@ -6,13 +6,12 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.util.*;
-import java.util.stream.Collectors;
 
-public class StaticticsFileReader {
-    private static final Logger log = Logger.getLogger(StaticticsFileReader.class);
+public class StatisticsFileReader {
+    private static final Logger log = Logger.getLogger(StatisticsFileReader.class);
     private StatisticsResolver resolver;
 
-    public StaticticsFileReader() {
+    public StatisticsFileReader() {
         this.resolver = new StatisticsResolver();
     }
 
