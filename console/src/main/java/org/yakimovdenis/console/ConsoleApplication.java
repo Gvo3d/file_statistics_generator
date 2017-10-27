@@ -1,12 +1,12 @@
-package org.yakimovdenis.statsgen;
+package org.yakimovdenis.console;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StatsgenApplication {
+public class ConsoleApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(StatsgenApplication.class, args);
+		SpringApplication.run(ConsoleApplication.class, args);
 	}
 }

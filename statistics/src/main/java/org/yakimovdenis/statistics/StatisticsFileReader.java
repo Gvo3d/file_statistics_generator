@@ -1,4 +1,4 @@
-package stats;
+package org.yakimovdenis.statistics;
 
 import org.apache.log4j.Logger;
 

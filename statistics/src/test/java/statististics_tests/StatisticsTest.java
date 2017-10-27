@@ -1,8 +1,8 @@
 package statististics_tests;
 
 import org.junit.Test;
-import stats.LineStatisticsResult;
-import stats.StatisticsResolver;
+import org.yakimovdenis.statistics.LineStatisticsResult;
+import org.yakimovdenis.statistics.StatisticsResolver;
 
 import java.util.List;
 

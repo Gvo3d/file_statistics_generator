@@ -1,2 +1,2 @@
 Known issues:
-Java filereading system has one issue. While reading last empty line it has been skipped. So files with last empty line will get size minus one. That is tested in statistics module testing (FilesTest.java). 
+Java filereading system has one issue. While reading last empty line it has been skipped. So files with last empty line will get size minus one. That is tested in org.yakimovdenis.statistics module testing (FilesTest.java). 

@@ -1,8 +1,8 @@
 package statististics_tests;
 
 import org.junit.Test;
-import stats.LineStatisticsResult;
-import stats.StatisticsFileReader;
+import org.yakimovdenis.statistics.LineStatisticsResult;
+import org.yakimovdenis.statistics.StatisticsFileReader;
 
 import java.io.File;
 import java.nio.file.NoSuchFileException;
