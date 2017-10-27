@@ -1,42 +1,31 @@
-package main.java.stats;
+package stats;
 
+import lombok.Data;
+
+@Data
 public class LineStatisticsResult {
+    private final static String LINE_SEPARATOR = System.lineSeparator();
     private String line;
     private String longestWord;
     private String shortestWord;
-    private float averageWordLenght;
+    private float averageWordLength;
 
-    public LineStatisticsResult(String line, String longestWord, String shortestWord, float averageWordLenght) {
+    public LineStatisticsResult(String line, String longestWord, String shortestWord, float averageWordLength) {
         this.line = line;
         this.longestWord = longestWord;
         this.shortestWord = shortestWord;
-        this.averageWordLenght = averageWordLenght;
-    }
-
-    public String getLine() {
-        return line;
-    }
-
-    public String getLongestWord() {
-        return longestWord;
-    }
-
-    public String getShortestWord() {
-        return shortestWord;
-    }
-
-    public float getAverageWordLenght() {
-        return averageWordLenght;
+        this.averageWordLength = averageWordLength;
     }
 
     @Override
     public String toString() {
-        return "LineStatisticsResult{" +
-                "line='" + line + '\'' +
-                ", longestWord='" + longestWord + '\'' +
+        String lineSize = line != null ? String.valueOf(line.length()) : "null";
+        return "LineStatisticsResult{" + LINE_SEPARATOR +
+                "line='" + line + "\'," + LINE_SEPARATOR +
+                "longestWord='" + longestWord + '\'' +
                 ", shortestWord='" + shortestWord + '\'' +
-                ", lineLenght=" + line.length() +
-                ", averageWordLenght=" + averageWordLenght +
+                ", lineLenght=" + lineSize +
+                ", averageWordLength=" + averageWordLength +
                 '}';
     }
 }

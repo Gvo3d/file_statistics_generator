@@ -1,42 +1,28 @@
-package main.java.stats;
+package stats;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Optional;
-import java.util.OptionalDouble;
+import java.util.*;
 
 public class StatisticsResolver {
     private final static String DEFAULT_WORD = "";
-    private static final Logger log = Logger.getLogger(OrderLogic.class);
-
-    private String splitter = "  ";
-    private static final int DEFAULT_STATISTICS_SIZE = 30;
-
+    private final static String SPLITTER = " ";
     private StringLengthComparator minComparator = new StringLengthComparator(true);
     private StringLengthComparator maxComparator = new StringLengthComparator(false);
 
-    public LineStatisticsResult[] getLineStatisticsForFile(File file) throws FileNotFoundException {
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        String line = null;
-        ArrayList<LineStatisticsResult> results = new ArrayList<>(DEFAULT_STATISTICS_SIZE);
-
-        try {
-            while ((line = reader.readLine()) != null) {
-                results.add(getLineStatistics(line));
-            }
-        } catch (IOException e){
-
-    } finally
-
-    {
-        reader.close();
+    public List<LineStatisticsResult> getLineStatisticsForFile(String[] lines) {
+        ArrayList<LineStatisticsResult> results = new ArrayList<>(lines.length);
+        for (String line : lines) {
+            results.add(getLineStatistics(line));
+        }
+        return results;
     }
 
-
-    public LineStatisticsResult getLineStatistics(String line) {
-        String[] words = line.split(splitter);
-        return new LineStatisticsResult(line, getWord(words, true).orElse(DEFAULT_WORD), getWord(words, false).orElse(DEFAULT_WORD), (float) averageWordLenght(words).orElse(0d));
+    private LineStatisticsResult getLineStatistics(String line) {
+        if (line!=null) {
+            String[] words = line.split(SPLITTER);
+            return new LineStatisticsResult(line, getWord(words, true).orElse(DEFAULT_WORD), getWord(words, false).orElse(DEFAULT_WORD), (float) averageWordLenght(words).orElse(0d));
+        } else {
+            return new LineStatisticsResult(null,null,null,0);
+        }
     }
 
     private Optional<String> getWord(String[] words, boolean longest) {
@@ -50,6 +36,4 @@ public class StatisticsResolver {
     private OptionalDouble averageWordLenght(String[] words) {
         return Arrays.stream(words).mapToInt(String::length).average();
     }
-}
-
 }
