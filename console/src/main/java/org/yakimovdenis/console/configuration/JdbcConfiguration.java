@@ -29,13 +29,13 @@ import java.util.Properties;
 public class JdbcConfiguration implements TransactionManagementConfigurer {
 
 
-    @Value("${dataSource.driverClassName}")
+    @Value("${databaseProperties.driverClassName}")
     private String driver;
-    @Value("${dataSource.url}")
+    @Value("${databaseProperties.url}")
     private String url;
-    @Value("${dataSource.username}")
+    @Value("${databaseProperties.username}")
     private String username;
-    @Value("${dataSource.password}")
+    @Value("${databaseProperties.password}")
     private String password;
 
     @PostConstruct
@@ -102,8 +102,6 @@ public class JdbcConfiguration implements TransactionManagementConfigurer {
 
         return comboPooledDataSource;
     }
-
-
 
     @Bean(name = "transactionManager")
     public PlatformTransactionManager annotationDrivenTransactionManager() {

@@ -12,8 +12,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
+import org.yakimovdenis.console.dao.FileStatisticsDao;
+import org.yakimovdenis.console.dao.FileStatisticsDaoImpl;
 import org.yakimovdenis.console.database.yaml.DataSourceYamlReader;
 import org.yakimovdenis.console.database.yaml.DatabaseProperties;
+import org.yakimovdenis.console.service.StatisticsService;
+import org.yakimovdenis.console.service.StatisticsServiceImpl;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
@@ -65,5 +69,15 @@ public class TestDAOConfig implements TransactionManagementConfigurer {
     @Bean
     NamedParameterJdbcTemplate namedParameterJdbcTemplate() {
         return new NamedParameterJdbcTemplate(dataSource());
+    }
+
+    @Bean
+    FileStatisticsDao fileStatisticsDao(){
+        return new FileStatisticsDaoImpl();
+    }
+
+    @Bean
+    StatisticsService statisticsService(){
+        return new StatisticsServiceImpl();
     }
 }

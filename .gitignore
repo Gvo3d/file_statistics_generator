@@ -26,3 +26,6 @@ nbdist/
 
 #LOGS#
 *.log
+/statistics/out
+/console/out
+/web-server/out
