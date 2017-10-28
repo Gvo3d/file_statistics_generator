@@ -54,6 +54,13 @@ public class DatabaseTests extends AbstractDatabaseTest {
         }
     }
 
+    @Test
+    public void doFolderFiles(){
+        List<FileStatistics> statistics = statisticsService.persistFileStatisticsInDirectory(getFileName("folderForTesting"));
+        assertEquals(4, statistics.size());
+        System.out.println(SEPARATOR);
+        statistics.stream().forEach(System.out::println);
+    }
 
     private String getFileName(String prefix){
         ClassLoader classLoader = getClass().getClassLoader();

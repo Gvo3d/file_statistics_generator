@@ -9,8 +9,17 @@ import org.yakimovdenis.console.model.FileStatistics;
 import org.yakimovdenis.stats.StatisticsFileReader;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
+
+import static org.junit.Assert.assertEquals;
 
 @Service
 public class StatisticsServiceImpl implements StatisticsService{
@@ -46,7 +55,24 @@ public class StatisticsServiceImpl implements StatisticsService{
 
     @Override
     public List<FileStatistics> persistFileStatisticsInDirectory(String dirName) {
-        return null;
+        List<String> fileList = new ArrayList<>();
+        try {
+            try (Stream<Path> paths = Files.walk(Paths.get(dirName))) {
+                paths.filter(Files::isRegularFile).forEach(x->fileList.add(x.toString()));
+            }
+        } catch (IOException e) {
+            log.error("Can't read directory: "+dirName, e);
+            return Collections.emptyList();
+        }
+        List<FileStatistics> fileStatistics = new ArrayList<>(fileList.size());
+        for (String file:fileList){
+            try {
+                fileStatistics.add(persistFileStatistics(file));
+            } catch (NoSuchFileException e) {
+                log.error("No such file: "+file, e);
+            }
+        }
+        return fileStatistics;
     }
 
     @Override
