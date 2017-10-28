@@ -16,8 +16,11 @@ import org.yakimovdenis.console.dao.FileStatisticsDao;
 import org.yakimovdenis.console.dao.FileStatisticsDaoImpl;
 import org.yakimovdenis.console.database.yaml.DataSourceYamlReader;
 import org.yakimovdenis.console.database.yaml.DatabaseProperties;
+import org.yakimovdenis.console.database.yaml.Props;
 import org.yakimovdenis.console.service.StatisticsService;
 import org.yakimovdenis.console.service.StatisticsServiceImpl;
+import org.yakimovdenis.console.support.FileStatisticsRowMapper;
+import org.yakimovdenis.console.support.LineStatisticsRowMapper;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
@@ -26,7 +29,7 @@ import java.beans.PropertyVetoException;
 @EnableTransactionManagement
 public class TestDAOConfig implements TransactionManagementConfigurer {
     private static final Logger LOGGER = Logger.getLogger(TestDAOConfig.class);
-    private DatabaseProperties properties;
+    private Props properties;
 
     public TestDAOConfig() {
         this.properties = DataSourceYamlReader.getDataSourceProperties();
@@ -46,18 +49,18 @@ public class TestDAOConfig implements TransactionManagementConfigurer {
     public DataSource realDataSource() {
         ComboPooledDataSource comboPooledDataSource = new ComboPooledDataSource();
         try {
-            Class.forName(properties.getDriverClassName());
+            Class.forName(properties.getDatabaseProperties().getDriverClassName());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         try {
-            comboPooledDataSource.setDriverClass(properties.getDriverClassName());
+            comboPooledDataSource.setDriverClass(properties.getDatabaseProperties().getDriverClassName());
         } catch (PropertyVetoException e) {
             e.printStackTrace();
         }
-        comboPooledDataSource.setJdbcUrl(properties.getUrl());
-        comboPooledDataSource.setUser(properties.getUsername());
-        comboPooledDataSource.setPassword(properties.getPassword());
+        comboPooledDataSource.setJdbcUrl(properties.getDatabaseProperties().getUrl());
+        comboPooledDataSource.setUser(properties.getDatabaseProperties().getUsername());
+        comboPooledDataSource.setPassword(properties.getDatabaseProperties().getPassword());
         return comboPooledDataSource;
     }
 
@@ -79,5 +82,15 @@ public class TestDAOConfig implements TransactionManagementConfigurer {
     @Bean
     StatisticsService statisticsService(){
         return new StatisticsServiceImpl();
+    }
+
+    @Bean
+    LineStatisticsRowMapper lineStatisticsRowMapper(){
+        return new LineStatisticsRowMapper();
+    }
+
+    @Bean
+    FileStatisticsRowMapper fileStatisticsRowMapper(){
+        return new FileStatisticsRowMapper();
     }
 }

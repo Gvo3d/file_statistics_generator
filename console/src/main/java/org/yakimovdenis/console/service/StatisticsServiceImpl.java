@@ -36,21 +36,21 @@ public class StatisticsServiceImpl implements StatisticsService{
 
     @Override
     public FileStatistics getStatisticsForFile(Integer id) {
-        return null;
-    }
-
-    @Override
-    public boolean updateFileStatistics(FileStatistics fileStatistics) {
-        return false;
+        return fileStatisticsDao.get(id);
     }
 
     @Override
     public boolean deleteFileStatistics(Integer id) {
-        return false;
+        return fileStatisticsDao.deleteFileStatistics(id);
     }
 
     @Override
     public List<FileStatistics> persistFileStatisticsInDirectory(String dirName) {
         return null;
+    }
+
+    @Override
+    public List<FileStatistics> getFileNameAndIds() {
+        return fileStatisticsDao.getFileNameAndIds();
     }
 }

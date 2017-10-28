@@ -1,18 +1,17 @@
 package org.yakimovdenis.console.database.yaml;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.yakimovdenis.console.ConsoleApplication;
+import org.yaml.snakeyaml.Yaml;
 
 public class DataSourceYamlReader {
     private final static String FILE_NAME = "application.yml";
 
-    public static DatabaseProperties getDataSourceProperties() {
-        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+    public static Props getDataSourceProperties() {
         ClassLoader classLoader = ConsoleApplication.class.getClassLoader();
         File file;
         try {
@@ -21,12 +20,14 @@ public class DataSourceYamlReader {
             System.out.println(e);
             throw e;
         }
-        DatabaseProperties source = null;
-        try {
-            source = mapper.readValue(file, DatabaseProperties.class);
-            System.out.println(ReflectionToStringBuilder.toString(source, ToStringStyle.MULTI_LINE_STYLE));
-        } catch (Exception e) {
+        Yaml yaml = new Yaml();
+        Props config = null;
+        try (InputStream in = Files.newInputStream(file.toPath())) {
+             config = yaml.loadAs(in, Props.class);
+            System.out.println("loaded: "+config.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return source;
+        return config;
     }
 }

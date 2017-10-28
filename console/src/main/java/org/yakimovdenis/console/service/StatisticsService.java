@@ -11,9 +11,9 @@ public interface StatisticsService {
 
     FileStatistics getStatisticsForFile(Integer id);
 
-    boolean updateFileStatistics(FileStatistics fileStatistics);
-
     boolean deleteFileStatistics(Integer id);
 
     List<FileStatistics> persistFileStatisticsInDirectory(String dirName);
+
+    List<FileStatistics> getFileNameAndIds();
 }
