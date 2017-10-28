@@ -33,7 +33,8 @@ public class FileStatisticsDaoImpl implements FileStatisticsDao {
         Map<String, Object> sqlParameters = new HashMap<>();
         sqlParameters.put("file_name", fileStatistics.getFileName());
         sqlParameters.put("upload_date", fileStatistics.getFileUploadDate());
-        int fileId = namedParameterJdbcTemplate.update(QueryConstants.SAVE_FILE_STATISTIC, sqlParameters);
+        namedParameterJdbcTemplate.update(QueryConstants.SAVE_FILE_STATISTIC, sqlParameters);
+        int fileId = namedParameterJdbcTemplate.query(QueryConstants.GET_FILE_BY_NAME, sqlParameters, fileStatisticsRowMapper).stream().findFirst().get().getId();
         for (LineStatisticsResult result : fileStatistics.getLineStatistics()) {
             saveLineStatistic(fileId, result);
         }
@@ -46,15 +47,19 @@ public class FileStatisticsDaoImpl implements FileStatisticsDao {
     public FileStatistics get(Integer id) {
         Map<String, Object> sqlParameters = new HashMap<>();
         sqlParameters.put("file_id", id);
-        FileStatistics fileStatistics = namedParameterJdbcTemplate.query(QueryConstants.GET_FILE, sqlParameters, fileStatisticsRowMapper).stream().findFirst().get();
-        fileStatistics.setLineStatistics(getLinesStatistic(fileStatistics.getId()));
+        FileStatistics fileStatistics = namedParameterJdbcTemplate.query(QueryConstants.GET_FILE, sqlParameters, fileStatisticsRowMapper).stream().findFirst().orElse(null);
+        if (fileStatistics!=null) {
+            fileStatistics.setLineStatistics(getLinesStatistic(fileStatistics.getId()));
+        }
         return fileStatistics;
     }
 
     @Override
+    @Transactional
     public boolean deleteFileStatistics(Integer id) {
         Map<String, Object> sqlParameters = new HashMap<>();
         sqlParameters.put("file_id", id);
+        namedParameterJdbcTemplate.update(QueryConstants.DELETE_LINE, sqlParameters);
         return namedParameterJdbcTemplate.update(QueryConstants.DELETE_FILE, sqlParameters) != 0;
     }
 
