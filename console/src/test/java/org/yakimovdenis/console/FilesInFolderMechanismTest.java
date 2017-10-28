@@ -20,7 +20,7 @@ public class FilesInFolderMechanismTest {
         getFileList(getFileName("folderForTesting"));
     }
 
-    public void getFileList(String path){
+    private void getFileList(String path){
         int i=0;
         List<Path> files = new ArrayList<>();
         try {

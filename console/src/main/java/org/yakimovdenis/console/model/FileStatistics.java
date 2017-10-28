@@ -21,4 +21,12 @@ public class FileStatistics {
 
     public FileStatistics() {
     }
+
+    @Override
+    public String toString() {
+        return "FileStatistics id=" + id + System.lineSeparator() +
+                "fileName='" + fileName + '\'' + System.lineSeparator() +
+                "fileUploadDate=" + fileUploadDate + System.lineSeparator() +
+                "lineStatistics=" + System.lineSeparator() + lineStatistics + '}';
+    }
 }

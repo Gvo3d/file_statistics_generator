@@ -1,4 +1,14 @@
 
+CONSOLE MODULE:
+Modulename: Console;
+Commands:
+"file {$fileName}" - process file and persist it's data to database.
+"filelist" - show file names and ids from database.
+"folder {$fileName}" - persist all files from folder into database.
+"show {$file id}" - show file data from database.
+"delete {$file id}" - delete file data from database.
+NOTE: {$file id} is integer that corresponds to primary key(from database) of file object, not the file name.
+
 Modules:
 Statistics - basic module with statistics system and filereader
 Console - module with spring-shell

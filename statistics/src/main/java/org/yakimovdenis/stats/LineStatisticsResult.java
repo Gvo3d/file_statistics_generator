@@ -20,12 +20,11 @@ public class LineStatisticsResult {
     @Override
     public String toString() {
         String lineSize = line != null ? String.valueOf(line.length()) : "null";
-        return "LineStatisticsResult{" + LINE_SEPARATOR +
-                "line='" + line + "\'," + LINE_SEPARATOR +
+        return "LineStatisticsResult of line='" + line + "\'," + LINE_SEPARATOR +
                 "longestWord='" + longestWord + '\'' +
                 ", shortestWord='" + shortestWord + '\'' +
                 ", lineLenght=" + lineSize +
                 ", averageWordLength=" + averageWordLength +
-                '}';
+                '}' + System.lineSeparator();
     }
 }
