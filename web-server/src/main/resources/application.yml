@@ -1,0 +1,15 @@
+#Database props:
+databaseProperties:
+  driverClassName: org.postgresql.Driver
+  url: jdbc:postgresql://192.168.99.100:5433/statsgen
+  username: statsgen
+  password: root
+  dialect: org.hibernate.dialect.PostgreSQLDialect
+  package: org.yakimovdenis.webserver.models
+
+#Application props:
+files:
+  folder:
+
+liquibase:
+  enabled: false

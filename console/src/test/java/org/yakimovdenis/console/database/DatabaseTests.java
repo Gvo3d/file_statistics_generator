@@ -4,6 +4,7 @@ package org.yakimovdenis.console.database;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.yakimovdenis.console.database.AbstractDatabaseTest;
 import org.yakimovdenis.console.model.FileStatistics;
 import org.yakimovdenis.console.service.StatisticsService;
 

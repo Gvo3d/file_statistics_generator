@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 import org.yakimovdenis.console.dao.FileStatisticsDao;
 import org.yakimovdenis.console.dao.FileStatisticsDaoImpl;
 import org.yakimovdenis.console.database.yaml.DataSourceYamlReader;
-import org.yakimovdenis.console.database.yaml.DatabaseProperties;
 import org.yakimovdenis.console.database.yaml.Props;
 import org.yakimovdenis.console.service.StatisticsService;
 import org.yakimovdenis.console.service.StatisticsServiceImpl;

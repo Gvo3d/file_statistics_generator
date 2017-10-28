@@ -28,7 +28,6 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class JdbcConfiguration implements TransactionManagementConfigurer {
 
-
     @Value("${databaseProperties.driverClassName}")
     private String driver;
     @Value("${databaseProperties.url}")
