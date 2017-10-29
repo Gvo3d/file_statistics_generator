@@ -21,7 +21,7 @@ public class JpaConfiguration extends JdbcConfiguration {
 
     @Value("${databaseProperties.dialect}")
     private String dialect;
-    @Value("${databaseProperties.package}")
+    @Value("${databaseProperties.modelPackage}")
     private String modelPackage;
 
     @Bean

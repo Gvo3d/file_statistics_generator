@@ -1,4 +1,4 @@
-package org.yakimovdenis.console.database.yaml;
+package org.yakimovdenis.yaml;
 
 public class Liquibase{
     private boolean enabled;

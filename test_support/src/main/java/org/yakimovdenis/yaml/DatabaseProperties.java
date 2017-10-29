@@ -1,4 +1,4 @@
-package org.yakimovdenis.console.database.yaml;
+package org.yakimovdenis.yaml;
 
 public class DatabaseProperties {
     private String driverClassName;
@@ -6,6 +6,7 @@ public class DatabaseProperties {
     private String username;
     private String password;
     private String dialect;
+    private String modelPackage;
 
     public String getDriverClassName() {
         return driverClassName;
@@ -47,14 +48,23 @@ public class DatabaseProperties {
         this.dialect = dialect;
     }
 
+    public String getModelPackage() {
+        return modelPackage;
+    }
+
+    public void setModelPackage(String modelPackage) {
+        this.modelPackage = modelPackage;
+    }
+
     @Override
     public String toString() {
-        return "DatabaseProperties{\n"+
-                "driverClassName='" + driverClassName + "\'\n" +
-                ", url='" + url + "\'\n" +
-                ", username='" + username + "\'\n" +
-                ", password='" + password + "\'\n" +
+        return "DatabaseProperties{" +
+                "driverClassName='" + driverClassName + '\'' +
+                ", url='" + url + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 ", dialect='" + dialect + '\'' +
+                ", modelPackage='" + modelPackage + '\'' +
                 '}';
     }
 }

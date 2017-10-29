@@ -1,6 +1,9 @@
 package org.yakimovdenis.webserver.models;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import org.yakimovdenis.webserver.dao.FileStatisticsEntityDao;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,9 +11,11 @@ import java.io.Serializable;
 @Data
 @Entity
 @Table(name="line_statistics")
-public class LineStatisticsResultEntity implements Serializable {
+@EqualsAndHashCode(exclude = "fileStatisticsEntity")
+@ToString(exclude = "fileStatisticsEntity")
+public class LineStatisticsResultEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Integer id;
     @Column(name="line")
@@ -21,6 +26,7 @@ public class LineStatisticsResultEntity implements Serializable {
     private String shortestWord;
     @Column(name="average_word_length")
     private float averageWordLength;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "file_id", nullable = false)
     private FileStatisticsEntity fileStatisticsEntity;
 }

@@ -7,6 +7,7 @@ buildscript {
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath('com.github.springtestdbunit:spring-test-dbunit:1.3.0')
 	}
 }
 
@@ -30,10 +31,13 @@ dependencies {
 	compile group: 'org.liquibase', name: 'liquibase-core', version: '3.5.3'
 	compile group: 'org.lazyluke', name: 'log4jdbc-remix', version: '0.2.7'
 	compile group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
+	compile group: 'org.yaml', name: 'snakeyaml', version: '1.11'
 	compile('log4j:log4j:1.2.17')
 	runtime('org.postgresql:postgresql')
 	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile group: 'com.github.springtestdbunit', name: 'spring-test-dbunit', version: '1.3.0'
 	compile project(':statistics')
 	compile project(':console')
+	compile project(':test_support')
 }

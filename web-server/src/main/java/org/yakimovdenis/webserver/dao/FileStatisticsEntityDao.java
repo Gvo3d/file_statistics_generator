@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import org.yakimovdenis.webserver.models.FileStatisticsEntity;
 
 @Repository
-public interface FileStatisticsEntityDao extends PagingAndSortingRepository<Integer, FileStatisticsEntity> {
+public interface FileStatisticsEntityDao extends PagingAndSortingRepository<FileStatisticsEntity, Integer> {
 }

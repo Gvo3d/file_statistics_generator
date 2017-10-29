@@ -1,21 +1,25 @@
-package org.yakimovdenis.console.database.yaml;
+package org.yakimovdenis.yaml;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 
-import org.yakimovdenis.console.ConsoleApplication;
+
 import org.yaml.snakeyaml.Yaml;
 
 public class DataSourceYamlReader {
-    private final static String FILE_NAME = "application.yml";
+    private Class target;
 
-    public static Props getDataSourceProperties() {
-        ClassLoader classLoader = ConsoleApplication.class.getClassLoader();
+    public DataSourceYamlReader(Class target) {
+        this.target = target;
+    }
+
+    public Props getDataSourceProperties(String fileName) {
+        ClassLoader classLoader = target.getClassLoader();
         File file;
         try {
-            file = new File(classLoader.getResource(FILE_NAME).getFile());
+            file = new File(classLoader.getResource(fileName).getFile());
         } catch (NullPointerException e) {
             System.out.println(e);
             throw e;

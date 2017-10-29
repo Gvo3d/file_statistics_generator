@@ -5,6 +5,7 @@ databaseProperties:
   username: statsgen
   password: root
   dialect: org.hibernate.dialect.PostgreSQLDialect
+  modelPackage: null
 
 liquibase:
   enabled: false

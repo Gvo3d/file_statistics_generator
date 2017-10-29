@@ -5,11 +5,7 @@ databaseProperties:
   username: statsgen
   password: root
   dialect: org.hibernate.dialect.PostgreSQLDialect
-  package: org.yakimovdenis.webserver.models
-
-#Application props:
-files:
-  folder:
+  modelPackage: org.yakimovdenis.webserver.models
 
 liquibase:
   enabled: false

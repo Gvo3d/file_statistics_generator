@@ -1,27 +1,31 @@
 package org.yakimovdenis.webserver.models;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @Entity
 @Table(name="files")
-public class FileStatisticsEntity implements Serializable {
+@EqualsAndHashCode(exclude = {"shortestWord", "longestWord", "averageWordLength", "lineStatistics"})
+public class FileStatisticsEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Integer id;
+    @Column(name="filename")
+    private String filename;
+    @Transient
     private String shortestWord;
+    @Transient
     private String longestWord;
+    @Transient
     private float averageWordLength;
     @Column(name="created")
     private Date uploadDate;
-    @OneToMany
-    private List<LineStatisticsResultEntity> lineStatistics;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "fileStatisticsEntity")
+    private Set<LineStatisticsResultEntity> lineStatistics = new HashSet<>();
 }

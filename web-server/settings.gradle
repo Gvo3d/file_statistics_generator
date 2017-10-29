@@ -1,3 +1,4 @@
 include 'statistics'
 include 'console'
+include 'test_support'
 

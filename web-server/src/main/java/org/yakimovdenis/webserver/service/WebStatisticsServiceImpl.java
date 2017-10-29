@@ -1,20 +1,21 @@
 package org.yakimovdenis.webserver.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.yakimovdenis.stats.StringLengthComparator;
 import org.yakimovdenis.webserver.dao.FileStatisticsEntityDao;
 import org.yakimovdenis.webserver.dao.LineStatisticsEntityDao;
 import org.yakimovdenis.webserver.models.FileStatisticsEntity;
 import org.yakimovdenis.webserver.models.LineStatisticsResultEntity;
 import org.yakimovdenis.webserver.support.StringComparator;
 
-import java.util.Comparator;
 import java.util.List;
 
 @Service
-public class StatisticsServiceImpl implements StatisticsService{
+public class WebStatisticsServiceImpl implements WebStatisticsService {
     private final static String DEFAULT_WORD = "";
 
     @Autowired
@@ -26,30 +27,57 @@ public class StatisticsServiceImpl implements StatisticsService{
     @Autowired
     private StringComparator stringComparator;
 
-    public void fillFileModelWithData(FileStatisticsEntity entity) {
+    private void fillFileModelWithData(FileStatisticsEntity entity) {
         entity.setShortestWord(entity.getLineStatistics().stream().map(LineStatisticsResultEntity::getShortestWord).min(stringComparator).orElse(DEFAULT_WORD));
         entity.setLongestWord(entity.getLineStatistics().stream().map(LineStatisticsResultEntity::getShortestWord).min(stringComparator).orElse(DEFAULT_WORD));
         entity.setAverageWordLength((float) entity.getLineStatistics().stream().mapToDouble(LineStatisticsResultEntity::getAverageWordLength).average().orElse(0d));
     }
 
-    @Override
-    public FileStatisticsEntity getFileStatistics(Integer id) {
-        return null;
-    }
-
-    @Override
-    public boolean deleteFileStatistics(Integer id) {
-        return false;
-    }
-
-    @Override
-    public FileStatisticsEntity persistFileStatistics(FileStatisticsEntity entity) {
-        return null;
+    private void fillFileLinesWithParentConnection(FileStatisticsEntity entity) {
+        for (LineStatisticsResultEntity line : entity.getLineStatistics()) {
+            line.setFileStatisticsEntity(entity);
+        }
     }
 
     @Override
     @Transactional
-    public List<FileStatisticsEntity> getFileStatisticsList() {
-        return null;
+    public FileStatisticsEntity getFileStatistics(Integer id) {
+        FileStatisticsEntity entity = fileStatisticsEntityDao.findOne(id);
+        if (entity != null) {
+            entity.getLineStatistics().size();
+        }
+        return entity;
+    }
+
+    @Override
+    public boolean deleteFileStatistics(Integer id) {
+        try {
+            fileStatisticsEntityDao.delete(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public FileStatisticsEntity persistFileStatistics(FileStatisticsEntity entity) {
+        fillFileLinesWithParentConnection(entity);
+        return fileStatisticsEntityDao.save(entity);
+    }
+
+    @Override
+    public Iterable<FileStatisticsEntity> persistFileStatistics(List<FileStatisticsEntity> entities) {
+        for (FileStatisticsEntity entity : entities) {
+            fillFileLinesWithParentConnection(entity);
+        }
+        return fileStatisticsEntityDao.save(entities);
+    }
+
+    @Override
+    public Page<FileStatisticsEntity> getFileStatisticsList(int page, int quantity, String sort, boolean ascend) {
+        if (sort == null) {
+            sort = "id";
+        }
+        return fileStatisticsEntityDao.findAll(new PageRequest(page, quantity, ascend ? Sort.Direction.ASC : Sort.Direction.DESC, sort));
     }
 }
