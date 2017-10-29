@@ -26,7 +26,7 @@ public class LineStatisticsResultEntity {
     private String shortestWord;
     @Column(name="average_word_length")
     private float averageWordLength;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "file_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "file_id")
     private FileStatisticsEntity fileStatisticsEntity;
 }

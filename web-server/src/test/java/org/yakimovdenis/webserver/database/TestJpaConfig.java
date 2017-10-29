@@ -38,25 +38,23 @@ import java.util.Properties;
 class TestJpaConfig {
     private static final Logger LOGGER = Logger.getLogger(TestJpaConfig.class);
     private Props properties;
-    private DataSource objectDataSource;
 
     public TestJpaConfig() {
         this.properties = new DataSourceYamlReader(WebServerApplication.class).getDataSourceProperties("application.yml");
     }
 
-//    @Bean
-//    public DataSource dataSource() {
-//        Log4jdbcProxyDataSource dataSource = new Log4jdbcProxyDataSource(realDataSource());
-//        Log4JdbcCustomFormatter log4JdbcCustomFormatter = new Log4JdbcCustomFormatter();
-//        log4JdbcCustomFormatter.setLoggingType(LoggingType.SINGLE_LINE);
-//        log4JdbcCustomFormatter.setSqlPrefix("SQL:::");
-//        dataSource.setLogFormatter(log4JdbcCustomFormatter);
-//        return dataSource;
-//    }
+    @Bean
+    public DataSource dataSource() {
+        Log4jdbcProxyDataSource dataSource = new Log4jdbcProxyDataSource(realDataSource());
+        Log4JdbcCustomFormatter log4JdbcCustomFormatter = new Log4JdbcCustomFormatter();
+        log4JdbcCustomFormatter.setLoggingType(LoggingType.SINGLE_LINE);
+        log4JdbcCustomFormatter.setSqlPrefix("SQL:::");
+        dataSource.setLogFormatter(log4JdbcCustomFormatter);
+        return dataSource;
+    }
 
     @Bean
     public DataSource realDataSource() {
-        if (objectDataSource!=null) return objectDataSource;
         ComboPooledDataSource comboPooledDataSource = new ComboPooledDataSource();
         try {
             Class.forName(properties.getDatabaseProperties().getDriverClassName());
@@ -71,9 +69,7 @@ class TestJpaConfig {
         comboPooledDataSource.setJdbcUrl(properties.getDatabaseProperties().getUrl());
         comboPooledDataSource.setUser(properties.getDatabaseProperties().getUsername());
         comboPooledDataSource.setPassword(properties.getDatabaseProperties().getPassword());
-        objectDataSource = comboPooledDataSource;
-        return objectDataSource;
-//        return comboPooledDataSource;
+        return comboPooledDataSource;
     }
 
     @Bean
@@ -82,14 +78,12 @@ class TestJpaConfig {
         entityManagerFactoryBean.setPackagesToScan(properties.getDatabaseProperties().getModelPackage());
         entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         entityManagerFactoryBean.setJpaProperties(jpaProperties());
-        entityManagerFactoryBean.setDataSource(realDataSource());
+        entityManagerFactoryBean.setDataSource(dataSource());
         return entityManagerFactoryBean;
     }
 
     @Bean(name = "transactionManager", autowire = Autowire.BY_NAME)
     public PlatformTransactionManager platformTransactionManager() {
-//        JpaTransactionManager manager =
-//        manager.setDataSource(realDataSource());
         return new JpaTransactionManager();
     }
 

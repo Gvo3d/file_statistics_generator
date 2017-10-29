@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -30,7 +31,7 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class WebDatabaseTests {
-    protected final String SEPARATOR = "**********************************************************";
+    private final String SEPARATOR = "**********************************************************";
 
     @Autowired
     private WebStatisticsService webStatisticsService;
@@ -67,14 +68,18 @@ public class WebDatabaseTests {
         System.out.println("Deleting returned: "+webStatisticsService.deleteFileStatistics(fileStatisticsEntity.getId()));
         fromDb = webStatisticsService.getFileStatistics(fileStatisticsEntity.getId());
         assertNull(fromDb);
+        System.out.println(SEPARATOR);
+        System.out.println("Asserting that there are no more of that file statistics in DB returned true");
     }
 
     @Test
     public void doPageTest(){
-        List<FileStatisticsEntity> page = webStatisticsService.getFileStatisticsList(0,10,"name", true).getContent();
+        Page<FileStatisticsEntity> page = webStatisticsService.getFileStatisticsList(0,10,"id", true);
+        System.out.println(page.toString());
         assertNotNull(page);
+        System.out.println(SEPARATOR);
         for (FileStatisticsEntity entity: page){
-            System.out.println(entity);
+            System.out.println("Entity: id="+entity.getId()+" name="+entity.getFilename()+" uploaded="+entity.getUploadDate());
         }
     }
 }
