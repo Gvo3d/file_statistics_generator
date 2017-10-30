@@ -1,7 +1,10 @@
-import {Injectable} from "@angular/core";
+import {Injectable, OnInit} from "@angular/core";
 
-@Injectable
-export class DataService{
+@Injectable()
+export class DataService implements OnInit{
+    ngOnInit(): void {
+        this.fileListPage = true;
+    }
     private _fileListPage: boolean;
 
     get fileListPage(): boolean {
