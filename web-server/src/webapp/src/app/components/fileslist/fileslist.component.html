@@ -1,16 +1,6 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-8">
-                    <h3>
-                        File Statistics Web Service by Yakimov Denis
-                    </h3>
-                </div>
-                <div class="col-md-4">
-                    <a routerLink="/fileupload"><button class="btn btn-success pull-right" >Upload file/folder</button></a>
-                </div>
-            </div>
             <table class="table">
                 <thead>
                 <tr>
@@ -23,7 +13,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let file of files">
+                <tr *ngFor="let file of files" (click)="showFilePage(file.id)">
                     <td>{{file.filename}}</td>
                     <td>{{file.uploadDate}}</td>
                     <td>{{file.size}}</td>

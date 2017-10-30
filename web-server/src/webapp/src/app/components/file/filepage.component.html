@@ -1,0 +1,66 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <form role="form">
+                <div class="form-group">
+                    <label for="name">
+                        Email address
+                    </label>
+                    <input type="text" class="form-control" id="name" disabled>{{file.filename}}</input>
+                </div>
+                <div class="form-group">
+                    <label for="date">
+                        Email address
+                    </label>
+                    <input type="text" class="form-control" id="date" disabled>{{file.uploadDate}}</input>
+                </div>
+                <div class="form-group">
+                    <label for="size">
+                        Email address
+                    </label>
+                    <input type="text" class="form-control" id="size" disabled>{{file.size}}</input>
+                </div>
+                <div class="form-group">
+                    <label for="short">
+                        Email address
+                    </label>
+                    <input type="text" class="form-control" id="short" disabled>{{file.shortestWord}}</input>
+                </div>
+                <div class="form-group">
+                    <label for="long">
+                        Email address
+                    </label>
+                    <input type="text" class="form-control" id="long" disabled>{{file.longestWord}}</input>
+                </div>
+                <div class="form-group">
+                    <label for="average">
+                        Email address
+                    </label>
+                    <input type="text" class="form-control" id="average" disabled>{{file.averageWordLength}}</input>
+                </div>
+                <label for="deleteButton">
+                    Password
+                </label>
+                <button type="submit" id="deleteButton" class="btn btn-default">Delete</button>
+            </form>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Full line</th>
+                    <th>Shortest word</th>
+                    <th>Longest Word</th>
+                    <th>Average length</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let lineSt of file.lines">
+                    <td>{{lineSt._line}}</td>
+                    <td>{{lineSt._shortestWord}}</td>
+                    <td>{{lineSt._longestWord}}</td>
+                    <td>{{lineSt._averageWordLength}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
