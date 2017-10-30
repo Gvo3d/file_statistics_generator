@@ -29,7 +29,7 @@ public class WebStatisticsServiceImpl implements WebStatisticsService {
 
     private void fillFileModelWithData(FileStatisticsEntity entity) {
         entity.setShortestWord(entity.getLineStatistics().stream().map(LineStatisticsResultEntity::getShortestWord).min(stringComparator).orElse(DEFAULT_WORD));
-        entity.setLongestWord(entity.getLineStatistics().stream().map(LineStatisticsResultEntity::getShortestWord).min(stringComparator).orElse(DEFAULT_WORD));
+        entity.setLongestWord(entity.getLineStatistics().stream().map(LineStatisticsResultEntity::getLongestWord).max(stringComparator).orElse(DEFAULT_WORD));
         entity.setAverageWordLength((float) entity.getLineStatistics().stream().mapToDouble(LineStatisticsResultEntity::getAverageWordLength).average().orElse(0d));
     }
 

@@ -33,8 +33,8 @@ public class FileStatistics {
     public void setLineStatistics(List<LineStatisticsResult> lineStatistics) {
         this.lineStatistics = lineStatistics;
         this.size = lineStatistics.size();
-        this.setShortestWord(this.getLineStatistics().stream().map(LineStatisticsResult::getShortestWord).min(STRING_COMPARATOR).orElse(DEFAULT_WORD));
-        this.setLongestWord(this.getLineStatistics().stream().map(LineStatisticsResult::getShortestWord).min(STRING_COMPARATOR).orElse(DEFAULT_WORD));
+        this.shortestWord = this.getLineStatistics().stream().map(LineStatisticsResult::getShortestWord).min(STRING_COMPARATOR).orElse(DEFAULT_WORD);
+        this.longestWord = this.getLineStatistics().stream().map(LineStatisticsResult::getLongestWord).max(STRING_COMPARATOR).orElse(DEFAULT_WORD);
         this.setAverageWordLength((float) this.getLineStatistics().stream().mapToDouble(LineStatisticsResult::getAverageWordLength).average().orElse(0d));
     }
 

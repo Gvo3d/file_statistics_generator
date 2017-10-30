@@ -10,7 +10,7 @@ import java.util.*;
 @Data
 @Entity
 @Table(name="files")
-@EqualsAndHashCode(exclude = {"shortestWord", "longestWord", "averageWordLength", "lineStatistics"})
+@EqualsAndHashCode(exclude = {"lineStatistics"})
 public class FileStatisticsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,12 +18,14 @@ public class FileStatisticsEntity {
     private Integer id;
     @Column(name="filename")
     private String filename;
-    @Transient
+    @Column(name="shortest_word")
     private String shortestWord;
-    @Transient
+    @Column(name="longest_word")
     private String longestWord;
-    @Transient
+    @Column(name="average_word_length")
     private float averageWordLength;
+    @Column(name="size")
+    private int size;
     @Column(name="created")
     private Date uploadDate;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "fileStatisticsEntity")

@@ -24,6 +24,18 @@
                 <constraints nullable="false"/>
             </column>
             <column name="created" type="DATETIME" valueDate="${now}"/>
+            <column name="longest_word" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="shortest_word" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="average_word_length" type="real">
+                <constraints nullable="false"/>
+            </column>
+            <column name="size" type="int">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
         <createTable tableName="line_statistics">

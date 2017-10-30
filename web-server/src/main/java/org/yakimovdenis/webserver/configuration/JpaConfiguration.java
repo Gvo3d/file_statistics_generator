@@ -12,6 +12,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
 import org.yakimovdenis.console.configuration.JdbcConfiguration;
+import org.yakimovdenis.console.support.StringComparator;
 
 import java.util.Properties;
 
@@ -43,5 +44,10 @@ public class JpaConfiguration extends JdbcConfiguration {
     @Bean(name = "transactionManager")
     public PlatformTransactionManager annotationDrivenTransactionManager() {
         return new JpaTransactionManager();
+    }
+
+    @Bean
+    public StringComparator stringComparator(){
+        return new StringComparator();
     }
 }
