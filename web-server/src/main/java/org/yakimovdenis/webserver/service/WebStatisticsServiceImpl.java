@@ -62,6 +62,7 @@ public class WebStatisticsServiceImpl implements WebStatisticsService {
     @Override
     public FileStatisticsEntity persistFileStatistics(FileStatisticsEntity entity) {
         fillFileLinesWithParentConnection(entity);
+        fillFileModelWithData(entity);
         return fileStatisticsEntityDao.save(entity);
     }
 
@@ -69,6 +70,7 @@ public class WebStatisticsServiceImpl implements WebStatisticsService {
     public Iterable<FileStatisticsEntity> persistFileStatistics(List<FileStatisticsEntity> entities) {
         for (FileStatisticsEntity entity : entities) {
             fillFileLinesWithParentConnection(entity);
+            fillFileModelWithData(entity);
         }
         return fileStatisticsEntityDao.save(entities);
     }
