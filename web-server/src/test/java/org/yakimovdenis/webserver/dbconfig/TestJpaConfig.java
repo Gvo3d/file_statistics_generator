@@ -1,4 +1,4 @@
-package org.yakimovdenis.webserver.database;
+package org.yakimovdenis.webserver.dbconfig;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import net.sf.log4jdbc.Log4jdbcProxyDataSource;
@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.yakimovdenis.webserver.WebServerApplication;
 import org.yakimovdenis.webserver.service.WebStatisticsService;
 import org.yakimovdenis.webserver.service.WebStatisticsServiceImpl;
-import org.yakimovdenis.console.support.StringComparator;
+import org.yakimovdenis.webserver.support.StringComparator;
 import org.yakimovdenis.yaml.*;
 
 import javax.sql.DataSource;
@@ -27,7 +27,7 @@ import java.util.Properties;
 @ContextConfiguration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackageClasses = WebServerApplication.class)
-class TestJpaConfig {
+public class TestJpaConfig {
     private static final Logger LOGGER = Logger.getLogger(TestJpaConfig.class);
     private Props properties;
 
