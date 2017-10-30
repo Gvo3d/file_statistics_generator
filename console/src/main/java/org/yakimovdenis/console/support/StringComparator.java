@@ -1,4 +1,4 @@
-package org.yakimovdenis.webserver.support;
+package org.yakimovdenis.console.support;
 
 import org.springframework.stereotype.Component;
 

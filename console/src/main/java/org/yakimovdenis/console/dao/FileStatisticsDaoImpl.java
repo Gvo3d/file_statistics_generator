@@ -33,6 +33,10 @@ public class FileStatisticsDaoImpl implements FileStatisticsDao {
         Map<String, Object> sqlParameters = new HashMap<>();
         sqlParameters.put("file_name", fileStatistics.getFileName());
         sqlParameters.put("upload_date", fileStatistics.getFileUploadDate());
+        sqlParameters.put("longest_word", fileStatistics.getLongestWord());
+        sqlParameters.put("shortest_word", fileStatistics.getShortestWord());
+        sqlParameters.put("average_word_length", fileStatistics.getAverageWordLength());
+        sqlParameters.put("size", fileStatistics.getSize());
         namedParameterJdbcTemplate.update(QueryConstants.SAVE_FILE_STATISTIC, sqlParameters);
         int fileId = namedParameterJdbcTemplate.query(QueryConstants.GET_FILE_BY_NAME, sqlParameters, fileStatisticsRowMapper).stream().findFirst().get().getId();
         for (LineStatisticsResult result : fileStatistics.getLineStatistics()) {

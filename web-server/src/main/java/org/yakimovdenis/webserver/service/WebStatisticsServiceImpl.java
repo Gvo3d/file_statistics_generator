@@ -10,7 +10,7 @@ import org.yakimovdenis.webserver.dao.FileStatisticsEntityDao;
 import org.yakimovdenis.webserver.dao.LineStatisticsEntityDao;
 import org.yakimovdenis.webserver.models.FileStatisticsEntity;
 import org.yakimovdenis.webserver.models.LineStatisticsResultEntity;
-import org.yakimovdenis.webserver.support.StringComparator;
+import org.yakimovdenis.console.support.StringComparator;
 
 import java.util.List;
 
