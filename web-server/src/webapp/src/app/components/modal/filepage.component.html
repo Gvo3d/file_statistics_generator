@@ -1,0 +1,77 @@
+<div class="modal-header">
+  <h4 class="modal-title">Hi there!</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <form role="form">
+          <div class="form-group">
+            <label for="name">
+              Email address
+            </label>
+            <input type="text" class="form-control" id="name" disabled [(ngModel)]="file.filename"/>
+          </div>
+          <div class="form-group">
+            <label for="date">
+              Email address
+            </label>
+            <input type="text" class="form-control" id="date" disabled [(ngModel)]="file.uploadDate"/>
+          </div>
+          <div class="form-group">
+            <label for="size">
+              Email address
+            </label>
+            <input type="text" class="form-control" id="size" disabled [(ngModel)]="file.size"/>
+          </div>
+          <div class="form-group">
+            <label for="short">
+              Email address
+            </label>
+            <input type="text" class="form-control" id="short" disabled [(ngModel)]="file.shortestWord"/>
+          </div>
+          <div class="form-group">
+            <label for="long">
+              Email address
+            </label>
+            <input type="text" class="form-control" id="long" disabled [(ngModel)]="file.longestWord"/>
+          </div>
+          <div class="form-group">
+            <label for="average">
+              Email address
+            </label>
+            <input type="text" class="form-control" id="average" disabled [(ngModel)]="file.averageWordLength"/>
+          </div>
+          <label for="deleteButton">
+            Password
+          </label>
+          <button type="submit" id="deleteButton" class="btn btn-default">Delete</button>
+        </form>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Full line</th>
+            <th>Shortest word</th>
+            <th>Longest Word</th>
+            <th>Average length</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let lineSt of file.lines">
+            <td>{{lineSt._line}}</td>
+            <td>{{lineSt._shortestWord}}</td>
+            <td>{{lineSt._longestWord}}</td>
+            <td>{{lineSt._averageWordLength}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>

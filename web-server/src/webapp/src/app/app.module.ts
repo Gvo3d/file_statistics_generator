@@ -10,12 +10,15 @@ import {ApplicationService} from "./services/application.service";
 import {DataService} from "./services/data.service";
 import {MainComponent} from "./components/main/main.component";
 import {HeaderComponent} from "./components/header/header.component";
+import {NgbActiveModal, NgbModal, NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {NgbdModalContent} from "./components/modal/modal.component";
 
 @NgModule({
-    imports: [RoutingModule, BrowserModule, FormsModule, HttpModule],
-    declarations: [FileslistComponent, FilePageComponent, MainComponent, HeaderComponent],
-    providers: [RestTemplate, DataService, ApplicationService],
-    bootstrap: [HeaderComponent, MainComponent]
+  imports: [RoutingModule, BrowserModule, FormsModule, HttpModule, NgbModule.forRoot()],
+  declarations: [FileslistComponent, FilePageComponent, MainComponent, HeaderComponent, NgbdModalContent],
+  entryComponents: [NgbdModalContent],
+  providers: [RestTemplate, DataService, ApplicationService, NgbModal],
+  bootstrap: [HeaderComponent, MainComponent]
 })
 
 export class AppModule {
