@@ -1,10 +1,10 @@
-import { Ng4StompDemoPage } from './app.po';
+import { WebappPage } from './app.po';
 
-describe('ng4-stomp-demo App', () => {
-  let page: Ng4StompDemoPage;
+describe('webapp App', function() {
+  let page: WebappPage;
 
   beforeEach(() => {
-    page = new Ng4StompDemoPage();
+    page = new WebappPage();
   });
 
   it('should display message saying app works', () => {

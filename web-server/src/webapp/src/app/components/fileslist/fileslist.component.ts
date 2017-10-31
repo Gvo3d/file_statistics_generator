@@ -21,7 +21,6 @@ export class FileslistComponent implements OnInit {
     }
 
     showFilePage(id: Number) {
-        this.router.navigate(['/fileshow&id='+id]);
+        // this.router.navigate(['/fileshow&id='+id]);
     }
-
 }
