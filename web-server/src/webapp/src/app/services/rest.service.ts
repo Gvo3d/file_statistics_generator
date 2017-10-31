@@ -21,6 +21,7 @@ export class RestTemplate implements OnInit {
     }
 
     public doGet(url: string) {
+      console.log('LAUNCHING:'+url);
         return this.http.get(this.getUrl(url), {headers: this.headers});
     }
 

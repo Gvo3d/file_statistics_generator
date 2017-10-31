@@ -23,13 +23,11 @@ export class FileslistComponent implements OnInit {
     }
 
     showFilePage(id: Number) {
-      let file: FileStatistic;
       this.applicationService.getRestTemplate.doGet(Constants.FILE_PAGE+"?id="+id).subscribe(x => {
         console.log(x.json());
-        file = x.json();
+        const modalRef = this.applicationService.getModalService.open(NgbdModalContent);
+        modalRef.componentInstance.file = x.json();
       });
-      const modalRef = this.applicationService.getModalService.open(NgbdModalContent);
-      modalRef.componentInstance.file = file;
         // this.router.navigate(['/fileshow&id='+id]);
     }
 }

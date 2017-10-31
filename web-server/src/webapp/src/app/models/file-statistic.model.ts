@@ -8,7 +8,7 @@ export class FileStatistic {
     private _shortestWord:String;
     private _longestWord:String;
     private _averageWordLength:number;
-    private _lines:LineStatistic[];
+    private _lineStatistics:LineStatistic[];
 
     get id(): number {
         return this._id;
@@ -66,11 +66,11 @@ export class FileStatistic {
         this._averageWordLength = value;
     }
 
-    get lines(): LineStatistic[] {
-        return this._lines;
+    get lineStatistics(): LineStatistic[] {
+        return this._lineStatistics;
     }
 
-    set lines(value: LineStatistic[]) {
-        this._lines = value;
+    set lineStatistics(value: LineStatistic[]) {
+        this._lineStatistics = value;
     }
 }

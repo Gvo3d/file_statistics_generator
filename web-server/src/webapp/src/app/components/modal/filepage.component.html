@@ -10,68 +10,58 @@
       <div class="col-md-12">
         <form role="form">
           <div class="form-group">
-            <label for="name">
-              Email address
-            </label>
-            <input type="text" class="form-control" id="name" disabled [(ngModel)]="file.filename"/>
+            <label for="name">Filename</label>
+            <input type="text" class="form-control" id="name" name="filename" disabled [(ngModel)]="file.filename"/>
           </div>
           <div class="form-group">
-            <label for="date">
-              Email address
-            </label>
-            <input type="text" class="form-control" id="date" disabled [(ngModel)]="file.uploadDate"/>
+            <label for="date">Upload date</label>
+            <input type="text" class="form-control" id="date" name="uploadDate" disabled
+                   [ngModel]="file.uploadDate | date: 'dd/MM/yyyy'"/>
           </div>
           <div class="form-group">
-            <label for="size">
-              Email address
-            </label>
-            <input type="text" class="form-control" id="size" disabled [(ngModel)]="file.size"/>
+            <label for="size">Lines count</label>
+            <input type="text" class="form-control" id="size" name="size" disabled [(ngModel)]="file.size"/>
           </div>
           <div class="form-group">
-            <label for="short">
-              Email address
-            </label>
-            <input type="text" class="form-control" id="short" disabled [(ngModel)]="file.shortestWord"/>
+            <label for="short">Shortest word</label>
+            <input type="text" class="form-control" id="short" name="shortestWord" disabled
+                   [(ngModel)]="file.shortestWord"/>
           </div>
           <div class="form-group">
-            <label for="long">
-              Email address
-            </label>
-            <input type="text" class="form-control" id="long" disabled [(ngModel)]="file.longestWord"/>
+            <label for="long">Longest word</label>
+            <input type="text" class="form-control" id="long" name="longestWord" disabled
+                   [(ngModel)]="file.longestWord"/>
           </div>
           <div class="form-group">
-            <label for="average">
-              Email address
-            </label>
-            <input type="text" class="form-control" id="average" disabled [(ngModel)]="file.averageWordLength"/>
+            <label for="average">Average word length</label>
+            <input type="text" class="form-control" id="average" name="averageWordLength" disabled
+                   [(ngModel)]="file.averageWordLength"/>
           </div>
-          <label for="deleteButton">
-            Password
-          </label>
-          <button type="submit" id="deleteButton" class="btn btn-default">Delete</button>
+          <table class="table">
+            <thead>
+            <tr>
+              <th>Full line</th>
+              <th>Shortest word</th>
+              <th>Longest Word</th>
+              <th>Average length</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr name="fileLines" *ngFor="let lineSt of file.lineStatistics">
+              <td>{{lineSt.line}}</td>
+              <td>{{lineSt.shortestWord}}</td>
+              <td>{{lineSt.longestWord}}</td>
+              <td>{{lineSt.averageWordLength}}</td>
+            </tr>
+            </tbody>
+          </table>
         </form>
-        <table class="table">
-          <thead>
-          <tr>
-            <th>Full line</th>
-            <th>Shortest word</th>
-            <th>Longest Word</th>
-            <th>Average length</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let lineSt of file.lines">
-            <td>{{lineSt._line}}</td>
-            <td>{{lineSt._shortestWord}}</td>
-            <td>{{lineSt._longestWord}}</td>
-            <td>{{lineSt._averageWordLength}}</td>
-          </tr>
-          </tbody>
-        </table>
       </div>
     </div>
   </div>
 </div>
 <div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Delete file statistics
+  </button>
   <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
 </div>

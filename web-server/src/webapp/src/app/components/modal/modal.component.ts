@@ -1,6 +1,5 @@
 import {Component, Input} from '@angular/core';
-
-import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {FileStatistic} from "../../models/file-statistic.model";
 
 @Component({
@@ -10,5 +9,6 @@ import {FileStatistic} from "../../models/file-statistic.model";
 export class NgbdModalContent {
   @Input() file: FileStatistic;
 
-  constructor(public activeModal: NgbActiveModal) {}
+  constructor(public activeModal: NgbActiveModal) {
+  }
 }
