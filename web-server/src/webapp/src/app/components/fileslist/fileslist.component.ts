@@ -10,19 +10,18 @@ import {Router} from "@angular/router";
 export class FileslistComponent implements OnInit {
     private files: FileStatistic[];
 
-    constructor(private applicationService: ApplicationService, private page: number, private quantity: number, private sort: string, private ascend: boolean, private router: Router) {
-        this.applicationService.getDataService.fileListPage = true;
+    constructor(private applicationService: ApplicationService, private router: Router) {
     }
 
     ngOnInit(): void {
-        this.applicationService.getRestTemplate.doGet(this.applicationService.getRestTemplate.concatenateFileListUrl(this.page, this.quantity, this.sort, this.ascend)).subscribe(x => {
+        this.applicationService.getRestTemplate.doGet(this.applicationService.getDataService.concatenateFileListUrl()).subscribe(x => {
             console.log(x.json());
             this.files = x.json();
         });
     }
 
     showFilePage(id: Number) {
-        this.applicationService.getDataService.fileListPage = false;
         this.router.navigate(['/fileshow&id='+id]);
     }
+
 }

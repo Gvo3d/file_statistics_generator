@@ -36,7 +36,4 @@ export class RestTemplate implements OnInit {
         return this.baseUrl + url;
     }
 
-    public concatenateFileListUrl(page: number, quantity: number, sort: string, ascend: boolean): string {
-        return Constants.FILE_LIST + "?page=" + page + "&quantity=" + quantity + "&sort=" + sort + "&ascend=" + ascend;
-    }
 }

@@ -2,13 +2,11 @@ import {Component} from '@angular/core';
 import {ApplicationService} from "../../services/application.service";
 
 @Component({
-  selector: 'main',
-  template: '<router-outlet></router-outlet>'
+  selector: 'header',
+  templateUrl: './header.component.html'
 })
 
-export class MainComponent {
-
+export class HeaderComponent {
   constructor(private applicationService: ApplicationService) {
   }
-
 }

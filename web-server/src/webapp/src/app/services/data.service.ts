@@ -1,17 +1,21 @@
 import {Injectable, OnInit} from "@angular/core";
+import {Constants} from "../constants";
 
 @Injectable()
-export class DataService implements OnInit{
-    ngOnInit(): void {
-        this.fileListPage = true;
-    }
-    private _fileListPage: boolean;
+export class DataService {
+    private fileList_page:number;
+    private fileList_quantity:number;
+    private fileList_sort:string;
+    private fileList_ascend:boolean;
 
-    get fileListPage(): boolean {
-        return this._fileListPage;
+    constructor() {
+        this.fileList_page=0;
+        this.fileList_quantity=4;
+        this.fileList_sort='id';
+        this.fileList_ascend=false;
     }
 
-    set fileListPage(value: boolean) {
-        this._fileListPage = value;
+    public concatenateFileListUrl(): string {
+        return Constants.FILE_LIST + "?page=" + this.fileList_page + "&quantity=" + this.fileList_quantity + "&sort=" + this.fileList_sort + "&ascend=" + this.fileList_ascend;
     }
 }
