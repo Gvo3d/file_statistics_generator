@@ -1,94 +1,56 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-      <ul class="nav nav-tabs">
-        <li class="active">
-          <a routerLink="/filelist">List of statistics</a>
-        </li>
-        <li>
-          <a routerLink="/fileupload">Upload file/folder</a>
-        </li>
-        <li class="dropdown pull-right" id="showby">
-            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Show by
-              <span class="caret"></span></button>
-            <ul class="dropdown-menu">
-              <li><a (click)="onDropDownClick(1)">1</a></li>
-              <li><a (click)="onDropDownClick(2)">2</a></li>
-              <li><a (click)="onDropDownClick(5)">5</a></li>
-              <li><a (click)="onDropDownClick(10)">10</a></li>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a routerLink="/filelist">List of statistics</a>
+                </li>
+                <li>
+                    <a (click)="showUploadPage(upload)">Upload file/folder</a>
+                </li>
+                <li class="dropdown pull-right" id="showby">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Show by
+                        <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a (click)="onDropDownClick(1)">1</a></li>
+                        <li><a (click)="onDropDownClick(2)">2</a></li>
+                        <li><a (click)="onDropDownClick(5)">5</a></li>
+                        <li><a (click)="onDropDownClick(10)">10</a></li>
+                    </ul>
+                </li>
             </ul>
-        </li>
-      </ul>
+        </div>
     </div>
-  </div>
 </div>
-<!--<div class="container-fluid">-->
-<!--<div class="row">-->
-<!--<div class="col-md-12">-->
-<!--<nav class="navbar navbar-default" role="navigation">-->
-<!--<div class="navbar-header">-->
-<!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">-->
-<!--<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>-->
-<!--</button> <a class="navbar-brand" href="#">File Statistics Web Service by Yakimov Denis</a>-->
-<!--</div>-->
-<!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">-->
-<!--<ul class="nav navbar-nav">-->
-<!--<li class="active">-->
-<!--<a routerLink="/filelist">List of statistics</a>-->
-<!--</li>-->
-<!--<li class="pull-right">-->
-<!--<a routerLink="/fileupload">Upload file/folder</a>-->
-<!--</li>-->
-<!--<li class="dropdown">-->
-<!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong class="caret"></strong></a>-->
-<!--<ul class="dropdown-menu">-->
-<!--<li>-->
-<!--<a href="#">Action</a>-->
-<!--</li>-->
-<!--<li>-->
-<!--<a href="#">Another action</a>-->
-<!--</li>-->
-<!--<li>-->
-<!--<a href="#">Something else here</a>-->
-<!--</li>-->
-<!--</ul>-->
-<!--</li>-->
-<!--</ul>-->
-<!--<form class="navbar-form navbar-left" role="search">-->
-<!--<div class="form-group">-->
-<!--<input type="text" class="form-control" />-->
-<!--</div>-->
-<!--<button type="submit" class="btn btn-default">-->
-<!--Submit-->
-<!--</button>-->
-<!--</form>-->
-<!--<ul class="nav navbar-nav navbar-right">-->
-<!--<li>-->
-<!--<a href="#">Link</a>-->
-<!--</li>-->
-<!--<li class="dropdown">-->
-<!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong class="caret"></strong></a>-->
-<!--<ul class="dropdown-menu">-->
-<!--<li>-->
-<!--<a href="#">Action</a>-->
-<!--</li>-->
-<!--<li>-->
-<!--<a href="#">Another action</a>-->
-<!--</li>-->
-<!--<li>-->
-<!--<a href="#">Something else here</a>-->
-<!--</li>-->
-<!--<li class="divider">-->
-<!--</li>-->
-<!--<li>-->
-<!--<a href="#">Separated link</a>-->
-<!--</li>-->
-<!--</ul>-->
-<!--</li>-->
-<!--</ul>-->
-<!--</div>-->
 
-<!--</nav>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
+<ng-template #upload>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Upload</h4>
+        <button type="button" id="closeBt" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="filename" class="col-sm-4 control-label">Filename (optional)</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="filename"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="file" class="col-sm-4 control-label">Choose file(folder)</label>
+                            <div class="col-sm-8">
+                                <input type="file" id="file"/>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

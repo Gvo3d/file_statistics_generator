@@ -1,12 +1,9 @@
-import {Component, OnInit, TemplateRef} from "@angular/core";
+import {Component, TemplateRef} from "@angular/core";
 import {ApplicationService} from "../../services/application.service";
 import {FileStatistic} from "../../models/file-statistic.model";
-import {Router} from "@angular/router";
 import {Constants} from "../../constants";
 import {BsModalRef} from "ngx-bootstrap";
 import {AbstractDataComponent} from "../abstract-data.component";
-import {DataService} from "../../services/data.service";
-import {FileStatisticPage} from "../../models/file-statistic-page.model";
 import {Page} from "../../models/pagination.model";
 
 @Component({
@@ -36,8 +33,8 @@ export class FileslistComponent extends AbstractDataComponent {
         let i;
         let j;
         if (filePage.pageNo > filePage.pagesCount - 3) {
-            i=filePage.pagesCount-5;
-            j = i+(filePage.pagesCount - i);
+            i = filePage.pagesCount - 5;
+            j = i + (filePage.pagesCount - i);
         } else {
             i = (filePage.pageNo > 1 ? filePage.pageNo - 2 : 0);
             j = (filePage.pagesCount > 4 ? i + 5 : filePage.pagesCount);

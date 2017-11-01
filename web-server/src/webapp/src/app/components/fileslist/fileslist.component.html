@@ -13,7 +13,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let file of pageData.fileStatistics" (click)="showFilePage(file.id, template)">
+                <tr *ngFor="let file of pageData.fileStatistics" (click)="showFilePage(file.id, show)">
                     <td>{{file.filename}}</td>
                     <td>{{file.uploadDate | date: 'dd'}}/{{file.uploadDate | date:'MM'}}/{{file.uploadDate | date:
                         'yyyy'}}
@@ -29,7 +29,7 @@
     </div>
 </div>
 
-<div>
+<div id="footer">
     <ul class="pagination" *ngIf="pageData.pageSize>0">
         <li [ngClass]="{'disabled': page.current}" *ngFor="let page of getPagination()">
             <a (click)="pageNo(page.pageNo)">{{page.name}}</a>
@@ -37,7 +37,7 @@
     </ul>
 </div>
 
-<ng-template #template>
+<ng-template #show>
     <div class="modal-header">
         <h4 class="modal-title pull-left">File statistics</h4>
         <button type="button" id="closeBt" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
