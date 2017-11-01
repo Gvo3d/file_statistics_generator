@@ -29,4 +29,6 @@ nbdist/
 /statistics/out
 /console/out
 /web-server/out
+/web-server/src/webapp/node_modules
+/web-server/src/temp
 npm-start.bat

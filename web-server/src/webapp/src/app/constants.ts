@@ -8,6 +8,6 @@ export class Constants {
     };
 
     public static get FILE_PAGE(): string {
-        return "/files/one";
+        return "/files/one?id=";
     };
 }

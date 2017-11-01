@@ -1,33 +1,30 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, TemplateRef} from "@angular/core";
 import {ApplicationService} from "../../services/application.service";
 import {FileStatistic} from "../../models/file-statistic.model";
 import {Router} from "@angular/router";
-import {NgbdModalContent} from "../modal/modal.component";
 import {Constants} from "../../constants";
+import {BsModalRef} from "ngx-bootstrap";
 
 @Component({
     templateUrl: './fileslist.component.html'
 })
 
-export class FileslistComponent implements OnInit {
-    private files: FileStatistic[];
+export class FileslistComponent {
+    private file: FileStatistic;
+    public modalRef: BsModalRef;
 
-    constructor(private applicationService: ApplicationService, private router: Router) {
+    constructor(private applicationService: ApplicationService) {
     }
 
-    ngOnInit(): void {
-        this.applicationService.getRestTemplate.doGet(this.applicationService.getDataService.concatenateFileListUrl()).subscribe(x => {
+    showFilePage(id: Number, template: TemplateRef<any>) {
+        this.applicationService.getRestTemplate.doGet(Constants.FILE_PAGE + id).subscribe(x => {
             console.log(x.json());
-            this.files = x.json();
+            this.file = x.json();
+            this.modalRef = this.applicationService.getModalService.show(template);
         });
     }
 
-    showFilePage(id: Number) {
-      this.applicationService.getRestTemplate.doGet(Constants.FILE_PAGE+"?id="+id).subscribe(x => {
-        console.log(x.json());
-        const modalRef = this.applicationService.getModalService.open(NgbdModalContent);
-        modalRef.componentInstance.file = x.json();
-      });
-        // this.router.navigate(['/fileshow&id='+id]);
+    getFileList():FileStatistic[]{
+        return this.applicationService.getDataService.files;
     }
 }

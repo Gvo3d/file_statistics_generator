@@ -10,14 +10,16 @@ import {ApplicationService} from "./services/application.service";
 import {DataService} from "./services/data.service";
 import {MainComponent} from "./components/main/main.component";
 import {HeaderComponent} from "./components/header/header.component";
-import {NgbActiveModal, NgbModal, NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {NgbdModalContent} from "./components/modal/modal.component";
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ModalModule } from 'ngx-bootstrap/modal';
+
 
 @NgModule({
-  imports: [RoutingModule, BrowserModule, FormsModule, HttpModule, NgbModule.forRoot()],
-  declarations: [FileslistComponent, FilePageComponent, MainComponent, HeaderComponent, NgbdModalContent],
-  entryComponents: [NgbdModalContent],
-  providers: [RestTemplate, DataService, ApplicationService, NgbModal],
+  imports: [RoutingModule, BrowserModule, FormsModule, HttpModule, BsDropdownModule.forRoot(), TooltipModule.forRoot(), ModalModule.forRoot()],
+  exports: [BsDropdownModule, TooltipModule, ModalModule],
+  declarations: [FileslistComponent, FilePageComponent, MainComponent, HeaderComponent],
+  providers: [RestTemplate, DataService, ApplicationService],
   bootstrap: [HeaderComponent, MainComponent]
 })
 
