@@ -10,4 +10,8 @@ export class Constants {
     public static get FILE_PAGE(): string {
         return "/files/one?id=";
     };
+
+    public static get FILE_PAGES_COUNT(): string {
+        return "/files/pagesCount";
+    };
 }

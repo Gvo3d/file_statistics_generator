@@ -7,8 +7,4 @@ import {ApplicationService} from "../../services/application.service";
 })
 
 export class MainComponent {
-
-  constructor(private applicationService: ApplicationService) {
-  }
-
 }

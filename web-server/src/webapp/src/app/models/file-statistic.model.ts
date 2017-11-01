@@ -1,4 +1,5 @@
 import {LineStatistic} from "./line-statistic.model";
+import {FileStatisticPage} from "./file-statistic-page.model";
 
 export class FileStatistic {
     private _id:number;

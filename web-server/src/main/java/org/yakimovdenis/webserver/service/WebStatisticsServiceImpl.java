@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.yakimovdenis.webserver.dao.FileStatisticsEntityDao;
 import org.yakimovdenis.webserver.dao.LineStatisticsEntityDao;
-import org.yakimovdenis.webserver.dto.FileStatisticsList;
 import org.yakimovdenis.webserver.models.FileStatisticsEntity;
 import org.yakimovdenis.webserver.models.LineStatisticsResultEntity;
 import org.yakimovdenis.webserver.support.StringComparator;
@@ -82,5 +81,10 @@ public class WebStatisticsServiceImpl implements WebStatisticsService {
             sort = "id";
         }
         return fileStatisticsEntityDao.findAll(new PageRequest(page, quantity, ascend ? Sort.Direction.ASC : Sort.Direction.DESC, sort));
+    }
+
+    @Override
+    public Integer getFileStatisticsPagesCount(int quantity) {
+        return Math.toIntExact(fileStatisticsEntityDao.count()/quantity);
     }
 }

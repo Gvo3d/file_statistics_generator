@@ -13,7 +13,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let file of getFileList()" (click)="showFilePage(file.id, template)">
+                <tr *ngFor="let file of pageData.fileStatistics" (click)="showFilePage(file.id, template)">
                     <td>{{file.filename}}</td>
                     <td>{{file.uploadDate | date: 'dd'}}/{{file.uploadDate | date:'MM'}}/{{file.uploadDate | date:
                         'yyyy'}}
@@ -27,6 +27,14 @@
             </table>
         </div>
     </div>
+</div>
+
+<div>
+    <ul class="pagination" *ngIf="pageData.pageSize>0">
+        <li [ngClass]="{'disabled': page.current}" *ngFor="let page of getPagination()">
+            <a (click)="pageNo(page.pageNo)">{{page.name}}</a>
+        </li>
+    </ul>
 </div>
 
 <ng-template #template>

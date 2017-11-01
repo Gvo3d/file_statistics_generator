@@ -1,7 +1,6 @@
 import {RouterModule, Routes} from "@angular/router";
 import {NgModule} from "@angular/core";
 import {FileslistComponent} from "./components/fileslist/fileslist.component";
-import {FilePageComponent} from "./components/file/filepage.component";
 import {MainComponent} from "./components/main/main.component";
 import {HeaderComponent} from "./components/header/header.component";
 
@@ -10,11 +9,6 @@ const appRoutes: Routes = [
     {
         path: 'header',
         component: HeaderComponent
-    },
-    {
-        path: 'fileshow?id=id',
-        component: FilePageComponent,
-        data: {title: 'File statistic'}
     },
     {
         path: 'filelist',

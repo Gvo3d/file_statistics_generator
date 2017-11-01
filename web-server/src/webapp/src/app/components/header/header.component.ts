@@ -1,27 +1,20 @@
 import {Component} from '@angular/core';
 import {ApplicationService} from "../../services/application.service";
 import {Router} from "@angular/router";
+import {AbstractDataComponent} from "../abstract-data.component";
+import {DataService} from "../../services/data.service";
 
 @Component({
     selector: 'header',
     templateUrl: './header.component.html'
 })
 
-export class HeaderComponent {
-    constructor(private applicationService: ApplicationService, private router: Router) {
-        this.loadData();
+export class HeaderComponent extends AbstractDataComponent {
+    constructor(applicationService: ApplicationService) {
+        super(applicationService);
     }
 
     onDropDownClick(quantity: number) {
-        console.log("onDropDownClick");
-        this.applicationService.getDataService.fileList_quantity = quantity;
-        this.loadData();
-    }
-
-    private loadData(){
-        this.applicationService.getRestTemplate.doGet(this.applicationService.getDataService.concatenateFileListUrl()).subscribe(x => {
-            console.log(x.json());
-            this.applicationService.getDataService.files = x.json();
-        });
+        this.pageQuantity(quantity);
     }
 }

@@ -20,7 +20,7 @@ export class RestTemplate implements OnInit {
         this.headers.append("Accept", 'application/json');
     }
 
-    public doGet(url: string) {
+    public doGet(url: string): Observable<Response> {
       console.log('LAUNCHING:'+url);
         return this.http.get(this.getUrl(url), {headers: this.headers});
     }

@@ -6,15 +6,11 @@ import {Router} from "@angular/router";
 
 @Injectable()
 export class ApplicationService {
-    constructor(private _rest: RestTemplate, private _data: DataService, private _modal: BsModalService, private _router: Router) {
+    constructor(private _rest: RestTemplate, private _data:DataService, private _modal: BsModalService, private _router: Router) {
     }
 
     get getRestTemplate(): RestTemplate {
         return this._rest;
-    }
-
-    get getDataService(): DataService {
-        return this._data;
     }
 
     get getModalService(): BsModalService {
@@ -23,5 +19,9 @@ export class ApplicationService {
 
     get getRouter(): Router {
         return this._router;
+    }
+
+    get getDataService(): DataService {
+        return this._data;
     }
 }

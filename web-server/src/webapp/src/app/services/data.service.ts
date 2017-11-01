@@ -1,48 +1,59 @@
 import {Injectable, OnInit} from "@angular/core";
 import {Constants} from "../constants";
-import {FileStatistic} from "../models/file-statistic.model";
+import {FileStatisticPage} from "../models/file-statistic-page.model";
+import {RestTemplate} from "./rest.service";
 
 @Injectable()
 export class DataService {
-    private _files: FileStatistic[];
-    private _fileList_page:number;
-    private _fileList_quantity:number;
-    private _fileList_sort:string;
-    private _fileList_ascend:boolean;
+    public loaded:boolean;
+    private _pageData: FileStatisticPage;
+    private _pageNo:number;
+    private _pageQuantity:number;
+    private _pageSort:string;
+    private _pageAscend:boolean;
 
-    constructor() {
-        console.log('CONSTRUCTOR!!!');
-        this._fileList_page=0;
-        this._fileList_quantity=4;
-        this._fileList_sort='id';
-        this._fileList_ascend=false;
+    constructor(private rest: RestTemplate) {
+        this.loaded = false;
+        this._pageNo=0;
+        this._pageQuantity=4;
+        this._pageSort='id';
+        this._pageAscend=false;
+        this._pageData = new FileStatisticPage;
+        this.populateData();
     }
 
-    public concatenateFileListUrl(): string {
-        return Constants.FILE_LIST + "?page=" + this._fileList_page + "&quantity=" + this._fileList_quantity + "&sort=" + this._fileList_sort + "&ascend=" + this._fileList_ascend;
+    public populateData(){
+        this.rest.doGet(Constants.FILE_LIST + "?page=" + this._pageNo + "&quantity=" + this._pageQuantity + "&sort=" + this._pageSort + "&ascend=" + this._pageAscend).subscribe(x => {
+            console.log(x.json());
+            this._pageData = x.json();
+            this.loaded = true;
+        });
     }
 
-    get files(): FileStatistic[] {
-        return this._files;
+    get pageData(): FileStatisticPage {
+        return this._pageData;
     }
 
-    set files(value: FileStatistic[]) {
-        this._files = value;
+    set pageNo(value: number) {
+        this._pageNo = value;
+        this.populateData();
     }
 
-    set fileList_page(value: number) {
-        this._fileList_page = value;
+    set pageQuantity(value: number) {
+        this._pageQuantity = value;
+        this._pageNo=0;
+        this.populateData();
     }
 
-    set fileList_quantity(value: number) {
-        this._fileList_quantity = value;
+    set pageSort(value: string) {
+        this._pageSort = value;
+        this._pageNo=0;
+        this.populateData();
     }
 
-    set fileList_sort(value: string) {
-        this._fileList_sort = value;
-    }
-
-    set fileList_ascend(value: boolean) {
-        this._fileList_ascend = value;
+    set pageAscend(value: boolean) {
+        this._pageAscend = value;
+        this._pageNo=0;
+        this.populateData();
     }
 }

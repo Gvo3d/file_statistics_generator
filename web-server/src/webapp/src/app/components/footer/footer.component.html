@@ -1,7 +1,16 @@
-<ul class="pagination">
-    <li><a href="#">1</a></li>
-    <li class="active"><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
-</ul>
+<div class="pagination" *ngIf="count > 0">
+    <div class="description">
+        <span class="page-counts">{{ getMin() }} - {{ getMax() }} of {{ count }}</span>
+        <span class="page-totals">{{ totalPages() }} pages</span>
+    </div>
+    <div class="numbers">
+        <button class="link" (click)="onPrev()" [disabled]="page === 1 || loading" [ngClass]="{ 'disabled': page === 1 || loading }">&lt; Previous</button>
+
+        <button
+                *ngFor="let pageNum of getPages()"
+                (click)="onPage(pageNum)"
+                [ngClass]="{'active': pageNum === page, 'disabled': loading}">{{ pageNum }}</button>
+
+        <button class="link" (click)="onNext(true)" [disabled]="lastPage() || loading" [ngClass]="{ 'disabled': lastPage() || loading }">Next &gt;</button>
+    </div>
+</div>
