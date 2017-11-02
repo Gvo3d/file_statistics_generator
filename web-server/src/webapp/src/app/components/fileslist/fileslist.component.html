@@ -6,35 +6,49 @@
                 <tr class="active">
                     <th>
                         <a (click)="sortStatisticsBy('filename')">Name:</a>
-                        <span *ngIf="getPageSort() == 'filename'" [ngClass]="{'glyphicon-sort-by-alphabet': getPageAscend(), 'glyphicon-sort-by-alphabet-alt': !getPageAscend()}" class="glyphicon"></span>
+                        <span *ngIf="getPageSort() == 'filename'"
+                              [ngClass]="{'glyphicon-sort-by-alphabet': getPageAscend(), 'glyphicon-sort-by-alphabet-alt': !getPageAscend()}"
+                              class="glyphicon"></span>
                     </th>
                     <th>
-                    <a (click)="sortStatisticsBy('uploadDate')">Upload date:</a>
-                    <span *ngIf="getPageSort() == 'uploadDate'"
-                          [ngClass]="{'glyphicon-sort-by-order': getPageAscend(), 'glyphicon-sort-by-order-alt': !getPageAscend()}" class="glyphicon"></span>
+                        <a (click)="sortStatisticsBy('uploadDate')">Upload date:</a>
+                        <span *ngIf="getPageSort() == 'uploadDate'"
+                              [ngClass]="{'glyphicon-sort-by-order': getPageAscend(), 'glyphicon-sort-by-order-alt': !getPageAscend()}"
+                              class="glyphicon"></span>
                     </th>
                     <th>
                         <a (click)="sortStatisticsBy('size')">Total lines:</a>
                         <span *ngIf="getPageSort() == 'size'"
-                              [ngClass]="{'glyphicon-sort-by-order': getPageAscend(), 'glyphicon-sort-by-order-alt': !getPageAscend()}" class="glyphicon"></span>
+                              [ngClass]="{'glyphicon-sort-by-order': getPageAscend(), 'glyphicon-sort-by-order-alt': !getPageAscend()}"
+                              class="glyphicon"></span>
                     </th>
                     <th>
                         <a (click)="sortStatisticsBy('shortestWord')">Shortest word:</a>
                         <span *ngIf="getPageSort() == 'shortestWord'"
-                              [ngClass]="{'glyphicon-sort-by-attributes': getPageAscend(), 'glyphicon-sort-by-attributes-alt': !getPageAscend()}" class="glyphicon"></span>
+                              [ngClass]="{'glyphicon-sort-by-attributes': getPageAscend(), 'glyphicon-sort-by-attributes-alt': !getPageAscend()}"
+                              class="glyphicon"></span>
                     </th>
                     <th>
                         <a (click)="sortStatisticsBy('longestWord')">Longest word:</a>
                         <span *ngIf="getPageSort() == 'longestWord'"
-                              [ngClass]="{'glyphicon-sort-by-attributes': getPageAscend(), 'glyphicon-sort-by-attributes-alt': !getPageAscend()}" class="glyphicon"></span>
+                              [ngClass]="{'glyphicon-sort-by-attributes': getPageAscend(), 'glyphicon-sort-by-attributes-alt': !getPageAscend()}"
+                              class="glyphicon"></span>
                     </th>
                     <th>
                         <a (click)="sortStatisticsBy('averageWordLength')">Average word length:</a>
                         <span *ngIf="getPageSort() == 'averageWordLength'"
-                              [ngClass]="{'glyphicon-sort-by-order': getPageAscend(), 'glyphicon-sort-by-order-alt': !getPageAscend()}" class="glyphicon"></span>
+                              [ngClass]="{'glyphicon-sort-by-order': getPageAscend(), 'glyphicon-sort-by-order-alt': !getPageAscend()}"
+                              class="glyphicon"></span>
                     </th>
                 </tr>
                 </thead>
+
+                <div class="row">
+                    <div id="loading" style="float: none" *ngIf="getDataLoading()">
+                        <img src="assets\img\loading.gif" alt="Please wait, while loading"/>
+                    </div>
+                </div>
+
                 <tbody>
                 <tr *ngFor="let file of pageData.fileStatistics" (click)="showFilePage(file.id, show)">
                     <td>{{file.filename}}</td>
@@ -53,6 +67,11 @@
 </div>
 
 <div id="footer" class="text-center">
+    <div *ngIf="getDataLoading()">
+        <ul class="pagination">
+            <li class="disabled"><a>0</a></li>
+        </ul>
+    </div>
     <ul class="pagination" *ngIf="pageData.pageSize>0">
         <li [ngClass]="{'disabled': page.current}" *ngFor="let page of getPagination()">
             <a (click)="pageNo(page.pageNo)">{{page.name}}</a>

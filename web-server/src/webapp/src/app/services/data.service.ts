@@ -5,6 +5,7 @@ import {RestTemplate} from "./rest.service";
 
 @Injectable()
 export class DataService {
+    private _loading:boolean=true;
     private _pageData: FileStatisticPage;
     private _pageNo:number;
     private _pageQuantity:number;
@@ -24,6 +25,7 @@ export class DataService {
         this.rest.doGet(Constants.FILE_LIST + "?page=" + this._pageNo + "&quantity=" + this._pageQuantity + "&sort=" + this._pageSort + "&ascend=" + this._pageAscend).subscribe(x => {
             console.log(x.json());
             this._pageData = x.json();
+            this._loading = false;
         });
     }
 
@@ -61,5 +63,9 @@ export class DataService {
 
     get pageAscend(): boolean {
         return this._pageAscend;
+    }
+
+    get loading(): boolean {
+        return this._loading;
     }
 }

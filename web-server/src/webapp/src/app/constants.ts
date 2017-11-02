@@ -1,4 +1,13 @@
+import {Ng4FilesConfig} from 'angular4-files-upload';
+
 export class Constants {
+    public static filesUploadConfig: Ng4FilesConfig = {
+        acceptExtensions: '*',
+        maxFilesCount: 30,
+        maxFileSize: 5120000,
+        totalFilesSize: 51200000
+    };
+
     public static get HOME_URL(): string {
         return "http://localhost:8080";
     };
@@ -14,4 +23,5 @@ export class Constants {
     public static get FILE_PAGES_COUNT(): string {
         return "/files/pagesCount";
     };
+
 }

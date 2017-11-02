@@ -12,13 +12,33 @@ import {HeaderComponent} from "./components/header/header.component";
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
 import {ModalModule} from 'ngx-bootstrap/modal';
+import {Ng4FilesModule} from 'angular4-files-upload';
 
 @NgModule({
-    imports: [RoutingModule, BrowserModule, FormsModule, HttpModule, BsDropdownModule.forRoot(), TooltipModule.forRoot(), ModalModule.forRoot()],
-    exports: [BsDropdownModule, TooltipModule, ModalModule],
-    declarations: [FileslistComponent, MainComponent, HeaderComponent],
-    providers: [RestTemplate, DataService, ApplicationService],
-    bootstrap: [HeaderComponent, MainComponent]
+    imports: [
+        RoutingModule,
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        Ng4FilesModule,
+        BsDropdownModule.forRoot(),
+        TooltipModule.forRoot(),
+        ModalModule.forRoot()],
+    exports: [
+        BsDropdownModule,
+        TooltipModule,
+        ModalModule],
+    declarations: [
+        FileslistComponent,
+        MainComponent,
+        HeaderComponent],
+    providers: [
+        RestTemplate,
+        DataService,
+        ApplicationService],
+    bootstrap: [
+        HeaderComponent,
+        MainComponent]
 })
 
 export class AppModule {

@@ -32,4 +32,8 @@ export abstract class AbstractDataComponent {
     getPageAscend(): boolean {
         return this.applicationService.getDataService.pageAscend;
     }
+
+    getDataLoading(): boolean {
+        return this.applicationService.getDataService.loading;
+    }
 }

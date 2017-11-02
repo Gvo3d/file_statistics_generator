@@ -18,3 +18,11 @@
   height: 60px;
   background-color: #f5f5f5;
 }
+
+#loading {
+  margin: 0;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
