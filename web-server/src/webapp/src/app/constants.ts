@@ -20,8 +20,8 @@ export class Constants {
         return "/files/one?id=";
     };
 
-    public static get FILE_PAGES_COUNT(): string {
-        return "/files/pagesCount";
+    public static get UPLOAD(): string {
+        return "/files/upload";
     };
 
 }

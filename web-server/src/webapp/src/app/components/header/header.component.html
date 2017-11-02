@@ -34,28 +34,27 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <ng4-files-drop (filesSelect)="filesSelect($event)">
-                        <div style="display: inline-block; height: 100px; width: 100px; background-color: gray">
-                            {{filesToUpload}}
+                    <div class="panel panel-info">
+                        <div class="panel-heading">Please, drag and drop files/folder to the block</div>
+                        <div id="load-error" class="panel-body" *ngIf="onError">
+                            <p>1) You can upload up to 30 files at one time.<br/>
+                                2) Maximum file size is 5 mb.<br/>
+                                3) Maximum size of all files is 50 mb.
+                            </p>
                         </div>
-                    </ng4-files-drop>
-                    <!--<form class="form-horizontal" role="form">-->
-                        <!--<div class="form-group">-->
-                            <!--<label for="filename" class="col-sm-4 control-label">Filename (optional)</label>-->
-                            <!--<div class="col-sm-8">-->
-                                <!--<input type="text" class="form-control" id="filename"/>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="form-group">-->
-                            <!--<label for="file" class="col-sm-4 control-label">Choose file(folder)</label>-->
-                            <!--<div class="col-sm-8">-->
-                                <!--<input type="file" id="file"/>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<button type="submit" class="btn btn-default">Submit</button>-->
-                    <!--</form>-->
+                        <div class="panel-body" style="height: 200px">
+                            <ng4-files-drop (filesSelect)="filesSelect($event)">
+                                <div class="upload-panel">
+                                    <span id="upload-glyph" *ngIf="!filesToUpload" class="glyphicon glyphicon-plus"
+                                          aria-hidden="true"></span>
+                                    {{filesToUpload}}
+                                </div>
+                            </ng4-files-drop>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </ng-template>
+

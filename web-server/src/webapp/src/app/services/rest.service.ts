@@ -25,8 +25,8 @@ export class RestTemplate implements OnInit {
         return this.http.get(this.getUrl(url), {headers: this.headers});
     }
 
-    public doPost(url: string, dataToSend: Object): Observable<Response> {
-        return this.http.post(this.getUrl(url), dataToSend, {headers: this.headers});
+    public doPost(url: string, dataToSend: Object, headers:Headers): Observable<Response> {
+        return this.http.post(this.getUrl(url), dataToSend, {headers: headers});
     }
 
     public doDelete(url: string): Observable<Response> {

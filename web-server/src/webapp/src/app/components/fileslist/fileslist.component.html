@@ -122,24 +122,24 @@
                             <input type="text" class="form-control" id="average" name="averageWordLength" disabled
                                    [(ngModel)]="file.averageWordLength"/>
                         </div>
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>Full line</th>
-                                <th>Shortest word</th>
-                                <th>Longest Word</th>
-                                <th>Average length</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr name="fileLines" *ngFor="let lineSt of file.lineStatistics">
-                                <td>{{lineSt.line==""?"-//-":lineSt.line}}</td>
-                                <td>{{lineSt.shortestWord==""?"-//-":lineSt.shortestWord}}</td>
-                                <td>{{lineSt.longestWord==""?"-//-":lineSt.longestWord}}</td>
-                                <td>{{lineSt.averageWordLength}}</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                            <table id="contentTable">
+                                <thead>
+                                <tr>
+                                    <th>Full line</th>
+                                    <th>Shortest word</th>
+                                    <th>Longest Word</th>
+                                    <th>Average length</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr name="fileLines" *ngFor="let lineSt of file.lineStatistics">
+                                    <td class = "content-tr">{{lineSt.line==""?"-//-":lineSt.line}}</td>
+                                    <td class = "content-tr">{{lineSt.shortestWord==""?"-//-":lineSt.shortestWord}}</td>
+                                    <td class = "content-tr">{{lineSt.longestWord==""?"-//-":lineSt.longestWord}}</td>
+                                    <td class = "content-tr">{{lineSt.averageWordLength}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
                     </form>
                 </div>
             </div>

@@ -36,4 +36,8 @@ export abstract class AbstractDataComponent {
     getDataLoading(): boolean {
         return this.applicationService.getDataService.loading;
     }
+
+    reloadData(){
+        this.applicationService.getDataService.populateData();
+    }
 }

@@ -3,6 +3,7 @@ package org.yakimovdenis.webserver.models;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.yakimovdenis.stats.LineStatisticsResult;
 
 import javax.persistence.*;
 import java.util.*;
@@ -39,4 +40,17 @@ public class FileStatisticsEntity {
     @JsonView(JacksonView.FullStatistic.class)
     @OrderBy("id ASC")
     private SortedSet<LineStatisticsResultEntity> lineStatistics = new TreeSet<>();
+
+    public void setLineStatisticsFromResult(List<LineStatisticsResult> lines){
+        TreeSet<LineStatisticsResultEntity> resultSet = new TreeSet<>((Comparator<LineStatisticsResultEntity>) (o1, o2) -> 1);
+        for (LineStatisticsResult line: lines){
+            LineStatisticsResultEntity entity = new LineStatisticsResultEntity();
+            entity.setLine(line.getLine());
+            entity.setShortestWord(line.getShortestWord());
+            entity.setLongestWord(line.getLongestWord());
+            entity.setAverageWordLength(line.getAverageWordLength());
+            resultSet.add(entity);
+        }
+        this.lineStatistics = resultSet;
+    }
 }

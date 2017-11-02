@@ -19,10 +19,38 @@
   background-color: #f5f5f5;
 }
 
+.upload-panel {
+  margin: 0 auto;
+  width: 98%;
+  height: 98%;
+}
+
+#upload-glyph {
+  color: #78dbff;
+  position: fixed;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 #loading {
   margin: 0;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+#load-error {
+  color: red;
+}
+
+#contentTable {
+  width: 570px;
+  table-layout: fixed;
+}
+
+.content-tr{
+  width: 120px;
+  word-wrap: break-word;
 }

@@ -22,6 +22,7 @@ export class DataService {
     }
 
     public populateData(){
+        this._loading = true;
         this.rest.doGet(Constants.FILE_LIST + "?page=" + this._pageNo + "&quantity=" + this._pageQuantity + "&sort=" + this._pageSort + "&ascend=" + this._pageAscend).subscribe(x => {
             console.log(x.json());
             this._pageData = x.json();
