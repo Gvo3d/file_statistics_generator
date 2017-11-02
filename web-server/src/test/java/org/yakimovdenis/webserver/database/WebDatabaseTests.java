@@ -16,9 +16,7 @@ import org.yakimovdenis.webserver.models.FileStatisticsEntity;
 import org.yakimovdenis.webserver.models.LineStatisticsResultEntity;
 import org.yakimovdenis.webserver.service.WebStatisticsService;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -39,7 +37,7 @@ public class WebDatabaseTests {
         FileStatisticsEntity fileStatisticsEntity = new FileStatisticsEntity();
         fileStatisticsEntity.setFilename("test_file");
         fileStatisticsEntity.setUploadDate(new Date(System.currentTimeMillis()));
-        Set<LineStatisticsResultEntity> lineSet = new HashSet<>();
+        SortedSet<LineStatisticsResultEntity> lineSet = new TreeSet<>((Comparator<LineStatisticsResultEntity>) (o1, o2) -> 1);
         LineStatisticsResultEntity entity = new LineStatisticsResultEntity();
         entity.setLine("template is a word");
         entity.setShortestWord("a");

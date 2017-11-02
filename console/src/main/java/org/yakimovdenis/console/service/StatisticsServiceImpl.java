@@ -14,15 +14,14 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.*;
 import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
 
 @Service
-public class StatisticsServiceImpl implements StatisticsService{
+public class StatisticsServiceImpl implements StatisticsService {
     private static final Logger log = Logger.getLogger(StatisticsService.class);
 
     private StatisticsFileReader statisticsFileReader = new StatisticsFileReader();
@@ -35,9 +34,9 @@ public class StatisticsServiceImpl implements StatisticsService{
         File file = new File(filename);
         FileStatistics fileStatistics;
         try {
-             fileStatistics = new FileStatistics(filename, statisticsFileReader.resolveFile(file));
+            fileStatistics = new FileStatistics(filename, statisticsFileReader.resolveFile(file));
         } catch (NoSuchFileException e) {
-            log.error("No such file was found: "+filename, e);
+            log.error("No such file was found: " + filename, e);
             throw e;
         }
         return fileStatisticsDao.save(fileStatistics);
@@ -58,18 +57,31 @@ public class StatisticsServiceImpl implements StatisticsService{
         List<String> fileList = new ArrayList<>();
         try {
             try (Stream<Path> paths = Files.walk(Paths.get(dirName))) {
-                paths.filter(Files::isRegularFile).forEach(x->fileList.add(x.toString()));
+                paths.filter(Files::isRegularFile).forEach(x -> fileList.add(x.toString()));
             }
         } catch (IOException e) {
-            log.error("Can't read directory: "+dirName, e);
+            log.error("Can't read directory: " + dirName, e);
             return Collections.emptyList();
         }
+        Set<Future<List<FileStatistics>>> set = new HashSet<>();
+        Runtime rnt = Runtime.getRuntime();
+        int cpus = rnt.availableProcessors();
+        ExecutorService threadPool = Executors.newFixedThreadPool(cpus);
+        int startingPoint = 0;
+        int diy = fileList.size() / cpus;
+        for (int i = 0; i < cpus; i++) {
+            int enddingPoint = startingPoint + diy <= fileList.size() ? startingPoint + diy : fileList.size();
+            DataMatcher matcher = new DataMatcher(fileList.subList(startingPoint, enddingPoint), fileStatisticsDao, statisticsFileReader);
+            Future<List<FileStatistics>> future = threadPool.submit(matcher);
+            set.add(future);
+            startingPoint = enddingPoint;
+        }
         List<FileStatistics> fileStatistics = new ArrayList<>(fileList.size());
-        for (String file:fileList){
+        for (Future<List<FileStatistics>> future : set) {
             try {
-                fileStatistics.add(persistFileStatistics(file));
-            } catch (NoSuchFileException e) {
-                log.error("No such file: "+file, e);
+                fileStatistics.addAll(future.get());
+            } catch (Exception e) {
+                log.warn(e);
             }
         }
         return fileStatistics;
@@ -78,5 +90,34 @@ public class StatisticsServiceImpl implements StatisticsService{
     @Override
     public List<FileStatistics> getFileNameAndIds() {
         return fileStatisticsDao.getFileNameAndIds();
+    }
+
+    private class DataMatcher implements Callable<List<FileStatistics>> {
+        private List<String> preData;
+        private FileStatisticsDao dao;
+        private StatisticsFileReader reader;
+
+        DataMatcher(List<String> preData, FileStatisticsDao dao, StatisticsFileReader reader) {
+            this.preData = preData;
+            this.dao = dao;
+            this.reader = reader;
+        }
+
+        @Override
+        public List<FileStatistics> call() throws Exception {
+            List<FileStatistics> result = new ArrayList<>(preData.size());
+            for (String fileName : preData) {
+                File file = new File(fileName);
+                FileStatistics fileStatistics;
+                try {
+                    fileStatistics = new FileStatistics(fileName, statisticsFileReader.resolveFile(file));
+                } catch (NoSuchFileException e) {
+                    log.error("No such file was found: " + fileName, e);
+                    throw e;
+                }
+                result.add(dao.save(fileStatistics));
+            }
+            return result;
+        }
     }
 }

@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.yakimovdenis.webserver.WebServerApplication;
 import org.yakimovdenis.webserver.service.WebStatisticsService;
 import org.yakimovdenis.webserver.service.WebStatisticsServiceImpl;
+import org.yakimovdenis.webserver.support.FileStatisticsComposer;
 import org.yakimovdenis.webserver.support.StringComparator;
 import org.yakimovdenis.yaml.*;
 
@@ -33,6 +34,11 @@ public class TestJpaConfig {
 
     public TestJpaConfig() {
         this.properties = new DataSourceYamlReader(WebServerApplication.class).getDataSourceProperties("application.yml");
+    }
+
+    @Bean
+    FileStatisticsComposer fileStatisticsComposer(){
+        return new FileStatisticsComposer();
     }
 
     @Bean

@@ -5,40 +5,40 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <table class="table">
+            <table class="table" style="table-layout: fixed; width: 100%;">
                 <thead>
                 <tr class="active">
-                    <th>
+                    <th class="ui-helper-center">
                         <a (click)="sortStatisticsBy('filename')">Name:</a>
                         <span *ngIf="getPageSort() == 'filename'"
                               [ngClass]="{'glyphicon-sort-by-alphabet': getPageAscend(), 'glyphicon-sort-by-alphabet-alt': !getPageAscend()}"
                               class="glyphicon"></span>
                     </th>
-                    <th>
+                    <th class="ui-helper-center">
                         <a (click)="sortStatisticsBy('uploadDate')">Upload date:</a>
                         <span *ngIf="getPageSort() == 'uploadDate'"
                               [ngClass]="{'glyphicon-sort-by-order': getPageAscend(), 'glyphicon-sort-by-order-alt': !getPageAscend()}"
                               class="glyphicon"></span>
                     </th>
-                    <th>
+                    <th class="ui-helper-center">
                         <a (click)="sortStatisticsBy('size')">Total lines:</a>
                         <span *ngIf="getPageSort() == 'size'"
                               [ngClass]="{'glyphicon-sort-by-order': getPageAscend(), 'glyphicon-sort-by-order-alt': !getPageAscend()}"
                               class="glyphicon"></span>
                     </th>
-                    <th>
+                    <th class="ui-helper-center">
                         <a (click)="sortStatisticsBy('shortestWord')">Shortest word:</a>
                         <span *ngIf="getPageSort() == 'shortestWord'"
                               [ngClass]="{'glyphicon-sort-by-attributes': getPageAscend(), 'glyphicon-sort-by-attributes-alt': !getPageAscend()}"
                               class="glyphicon"></span>
                     </th>
-                    <th>
+                    <th class="ui-helper-center">
                         <a (click)="sortStatisticsBy('longestWord')">Longest word:</a>
                         <span *ngIf="getPageSort() == 'longestWord'"
                               [ngClass]="{'glyphicon-sort-by-attributes': getPageAscend(), 'glyphicon-sort-by-attributes-alt': !getPageAscend()}"
                               class="glyphicon"></span>
                     </th>
-                    <th>
+                    <th class="ui-helper-center">
                         <a (click)="sortStatisticsBy('averageWordLength')">Average word length:</a>
                         <span *ngIf="getPageSort() == 'averageWordLength'"
                               [ngClass]="{'glyphicon-sort-by-order': getPageAscend(), 'glyphicon-sort-by-order-alt': !getPageAscend()}"
@@ -55,14 +55,14 @@
 
                 <tbody>
                 <tr *ngFor="let file of pageData.fileStatistics" (click)="showFilePage(file.id, show)">
-                    <td>{{file.filename}}</td>
-                    <td>{{file.uploadDate | date: 'dd'}}/{{file.uploadDate | date:'MM'}}/{{file.uploadDate | date:
+                    <td class="content-td">{{file.filename}}</td>
+                    <td class="ui-helper-center">{{file.uploadDate | date: 'dd'}}/{{file.uploadDate | date:'MM'}}/{{file.uploadDate | date:
                         'yyyy'}}
                     </td>
-                    <td>{{file.size}}</td>
-                    <td>{{file.shortestWord}}</td>
-                    <td>{{file.longestWord}}</td>
-                    <td>{{file.averageWordLength}}</td>
+                    <td class="ui-helper-center">{{file.size}}</td>
+                    <td class="content-td">{{file.shortestWord}}</td>
+                    <td class="content-td">{{file.longestWord}}</td>
+                    <td class="ui-helper-center">{{file.averageWordLength}}</td>
                 </tr>
                 </tbody>
             </table>
@@ -89,7 +89,9 @@
         <button type="button" id="closeBt" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
             <span aria-hidden="true">&times;</span>
         </button>
-        <button (click)="deleteStatistics(file.id)" id="deleteButton" class="btn btn-default btn-sm pull-right">Delete this statistic</button>
+        <button (click)="deleteStatistics(file.id)" id="deleteButton" class="btn btn-default btn-sm pull-right">Delete
+            this statistic
+        </button>
     </div>
     <div class="modal-body">
         <div class="container-fluid">
@@ -126,24 +128,24 @@
                             <input type="text" class="form-control" id="average" name="averageWordLength" disabled
                                    [(ngModel)]="file.averageWordLength"/>
                         </div>
-                            <table id="contentTable">
-                                <thead>
-                                <tr>
-                                    <th>Full line</th>
-                                    <th>Shortest word</th>
-                                    <th>Longest Word</th>
-                                    <th>Average length</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr name="fileLines" *ngFor="let lineSt of file.lineStatistics">
-                                    <td class = "content-tr">{{lineSt.line==""?"-//-":lineSt.line}}</td>
-                                    <td class = "content-tr">{{lineSt.shortestWord==""?"-//-":lineSt.shortestWord}}</td>
-                                    <td class = "content-tr">{{lineSt.longestWord==""?"-//-":lineSt.longestWord}}</td>
-                                    <td class = "content-tr">{{lineSt.averageWordLength}}</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                        <table id="contentTable">
+                            <thead>
+                            <tr>
+                                <th>Full line</th>
+                                <th>Shortest word</th>
+                                <th>Longest Word</th>
+                                <th>Average length</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr name="fileLines" *ngFor="let lineSt of file.lineStatistics">
+                                <td class="content-tr">{{lineSt.line==""?"-//-":lineSt.line}}</td>
+                                <td class="content-tr">{{lineSt.shortestWord==""?"-//-":lineSt.shortestWord}}</td>
+                                <td class="content-tr">{{lineSt.longestWord==""?"-//-":lineSt.longestWord}}</td>
+                                <td class="content-tr">{{lineSt.averageWordLength}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </form>
                 </div>
             </div>

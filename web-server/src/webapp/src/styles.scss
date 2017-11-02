@@ -50,7 +50,18 @@
   table-layout: fixed;
 }
 
-.content-tr{
+.content-tr {
   width: 120px;
   word-wrap: break-word;
+}
+
+.content-td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: break-word;
+}
+
+.ui-helper-center {
+  text-align: center;
 }

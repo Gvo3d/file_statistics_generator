@@ -29,7 +29,7 @@ export class HeaderComponent extends AbstractDataComponent {
         this.modalRef = this.applicationService.getModalService.show(template);
     }
 
-    modalClose(){
+    modalClose() {
         this.modalRef.hide();
         this.onError = false;
     }
@@ -37,15 +37,24 @@ export class HeaderComponent extends AbstractDataComponent {
     public filesSelect(selectedFiles: Ng4FilesSelected): void {
         this.onError = false;
         if (selectedFiles.status !== Ng4FilesStatus.STATUS_SUCCESS) {
-            this.filesToUpload = selectedFiles.status;
             this.onError = true;
+            this.filesToUpload = selectedFiles.status;
         }
-        this.filesToUpload = Array.from(selectedFiles.files).map(file => file.name);
-        console.log(selectedFiles);
+        let first:boolean = true;
+        this.filesToUpload = Array.from(selectedFiles.files).map(file => {
+            if (!first){
+                ", \n"+file.name;
+            } else {
+                file.name;
+            }
+            first = false;
+        });
         let formData = new FormData();
+
         for (let file of selectedFiles.files) {
             formData.append('files', file, file.name);
         }
+
         let headers: Headers = new Headers();
         headers.append("Accept", 'application/json');
         this.applicationService.getRestTemplate.doPost(Constants.UPLOAD, formData, headers).subscribe(x => {

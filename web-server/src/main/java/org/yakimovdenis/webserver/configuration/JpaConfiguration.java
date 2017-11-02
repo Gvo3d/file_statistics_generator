@@ -23,6 +23,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
+import org.yakimovdenis.webserver.support.FileStatisticsComposer;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
@@ -128,7 +129,6 @@ public class JpaConfiguration implements TransactionManagementConfigurer {
         entityManagerFactoryBean.setDataSource(dataSource());
         return entityManagerFactoryBean;
     }
-
 
     @Bean(name = "transactionManager", autowire = Autowire.BY_NAME)
     public PlatformTransactionManager annotationDrivenTransactionManager() {
