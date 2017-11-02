@@ -13,6 +13,7 @@ import {Page} from "../../models/pagination.model";
 export class FileslistComponent extends AbstractDataComponent {
     private file: FileStatistic;
     public modalRef: BsModalRef;
+    private deleted:boolean = false;
 
     constructor(applicationService: ApplicationService) {
         super(applicationService);
@@ -52,5 +53,14 @@ export class FileslistComponent extends AbstractDataComponent {
         }
         result.push(new Page(filePage.pagesCount - 1, ">>", !(filePage.pageNo < filePage.pagesCount - 3)));
         return result;
+    }
+
+    deleteStatistics(id:number) {
+        this.applicationService.getRestTemplate.doDelete(Constants.DELETE+id).subscribe(x => {
+            console.log(x.json());
+            this.deleted = x.json();
+            this.modalRef.hide();
+            this.reloadData();
+        });
     }
 }

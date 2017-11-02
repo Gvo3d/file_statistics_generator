@@ -29,6 +29,11 @@ export class HeaderComponent extends AbstractDataComponent {
         this.modalRef = this.applicationService.getModalService.show(template);
     }
 
+    modalClose(){
+        this.modalRef.hide();
+        this.onError = false;
+    }
+
     public filesSelect(selectedFiles: Ng4FilesSelected): void {
         this.onError = false;
         if (selectedFiles.status !== Ng4FilesStatus.STATUS_SUCCESS) {
@@ -36,6 +41,7 @@ export class HeaderComponent extends AbstractDataComponent {
             this.onError = true;
         }
         this.filesToUpload = Array.from(selectedFiles.files).map(file => file.name);
+        console.log(selectedFiles);
         let formData = new FormData();
         for (let file of selectedFiles.files) {
             formData.append('files', file, file.name);
@@ -53,7 +59,7 @@ export class HeaderComponent extends AbstractDataComponent {
             () => {
                 console.log('Request Complete');
                 this.reloadData();
-                this.modalRef.hide();
+                this.modalClose();
                 this.filesToUpload = null;
             });
     }

@@ -24,4 +24,7 @@ export class Constants {
         return "/files/upload";
     };
 
+    public static get DELETE(): string {
+        return "/files/delete?id=";
+    };
 }

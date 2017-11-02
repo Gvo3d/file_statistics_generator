@@ -40,3 +40,8 @@ dependencies {
 	compile project(':statistics')
 	compile project(':test_support')
 }
+
+task start(type: Exec) {
+	executable "sh"
+	args "echo '/path/to/yourscript.sh"
+}

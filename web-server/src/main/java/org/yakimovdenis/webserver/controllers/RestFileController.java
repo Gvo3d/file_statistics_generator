@@ -57,4 +57,9 @@ public class RestFileController {
     public ResponseEntity<FileStatisticsEntity> getOneFile(@RequestParam("id") int id) {
         return new ResponseEntity<>(webStatisticsService.getFileStatistics(id), HttpStatus.OK);
     }
+
+    @DeleteMapping(value = "/files/delete", params = {"id"})
+    public ResponseEntity<Boolean> delete(@RequestParam("id") int id) {
+        return new ResponseEntity<>(webStatisticsService.deleteFileStatistics(id), HttpStatus.OK);
+    }
 }

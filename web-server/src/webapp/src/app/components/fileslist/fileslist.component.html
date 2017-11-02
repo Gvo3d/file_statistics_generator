@@ -1,3 +1,7 @@
+<div *ngIf="deleted">
+    <p></p>
+</div>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
@@ -85,7 +89,7 @@
         <button type="button" id="closeBt" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
             <span aria-hidden="true">&times;</span>
         </button>
-        <button type="submit" id="deleteButton" class="btn btn-default btn-sm pull-right">Delete this statistic</button>
+        <button (click)="deleteStatistics(file.id)" id="deleteButton" class="btn btn-default btn-sm pull-right">Delete this statistic</button>
     </div>
     <div class="modal-body">
         <div class="container-fluid">
