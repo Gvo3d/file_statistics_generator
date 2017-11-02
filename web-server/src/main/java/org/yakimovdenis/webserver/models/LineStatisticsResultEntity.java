@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Table(name="line_statistics")
 @EqualsAndHashCode(exclude = "fileStatisticsEntity")
 @ToString(exclude = "fileStatisticsEntity")
-public class LineStatisticsResultEntity {
+public class LineStatisticsResultEntity implements Comparable<LineStatisticsResultEntity>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
@@ -35,4 +35,9 @@ public class LineStatisticsResultEntity {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "file_id")
     private FileStatisticsEntity fileStatisticsEntity;
+
+    @Override
+    public int compareTo(LineStatisticsResultEntity o) {
+        return this.getId().compareTo(o.getId());
+    }
 }

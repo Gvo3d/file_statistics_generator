@@ -26,6 +26,14 @@ export class FileslistComponent extends AbstractDataComponent {
         });
     }
 
+    sortStatisticsBy(parameter: string) {
+        if (parameter == this.getPageSort()) {
+            this.changePageAscend();
+        } else {
+            this.pageSort(parameter);
+        }
+    }
+
     getPagination(): Page[] {
         let filePage = this.pageData;
         let result: Page[] = [];
@@ -33,8 +41,8 @@ export class FileslistComponent extends AbstractDataComponent {
         let i;
         let j;
         if (filePage.pageNo > filePage.pagesCount - 3) {
-            i = filePage.pagesCount - 5;
-            j = i + (filePage.pagesCount - i);
+            i = filePage.pagesCount - 5<0?0:filePage.pagesCount - 5;
+            j = filePage.pagesCount < i + (filePage.pagesCount - i) ? filePage.pagesCount : i + (filePage.pagesCount - i);
         } else {
             i = (filePage.pageNo > 1 ? filePage.pageNo - 2 : 0);
             j = (filePage.pagesCount > 4 ? i + 5 : filePage.pagesCount);

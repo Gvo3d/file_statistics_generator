@@ -72,6 +72,7 @@ export class FileStatistic {
     }
 
     set lineStatistics(value: LineStatistic[]) {
+        console.log('I am setting the shit!');
         this._lineStatistics = value;
     }
 }

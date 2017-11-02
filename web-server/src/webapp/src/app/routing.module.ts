@@ -1,7 +1,6 @@
 import {RouterModule, Routes} from "@angular/router";
 import {NgModule} from "@angular/core";
 import {FileslistComponent} from "./components/fileslist/fileslist.component";
-import {MainComponent} from "./components/main/main.component";
 import {HeaderComponent} from "./components/header/header.component";
 
 const appRoutes: Routes = [

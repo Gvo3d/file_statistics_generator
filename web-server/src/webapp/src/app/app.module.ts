@@ -7,20 +7,18 @@ import {FileslistComponent} from "./components/fileslist/fileslist.component";
 import {RestTemplate} from "./services/rest.service";
 import {ApplicationService} from "./services/application.service";
 import {DataService} from "./services/data.service";
-import {MainComponent} from "./components/main/main.component";
+import {MainComponent} from "./components/main.component";
 import {HeaderComponent} from "./components/header/header.component";
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { ModalModule } from 'ngx-bootstrap/modal';
-import {FooterComponent} from "./components/footer/footer.component";
-
+import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
+import {TooltipModule} from 'ngx-bootstrap/tooltip';
+import {ModalModule} from 'ngx-bootstrap/modal';
 
 @NgModule({
-  imports: [RoutingModule, BrowserModule, FormsModule, HttpModule, BsDropdownModule.forRoot(), TooltipModule.forRoot(), ModalModule.forRoot()],
-  exports: [BsDropdownModule, TooltipModule, ModalModule],
-  declarations: [FileslistComponent, MainComponent, HeaderComponent],
-  providers: [RestTemplate, DataService, ApplicationService],
-  bootstrap: [HeaderComponent, MainComponent]
+    imports: [RoutingModule, BrowserModule, FormsModule, HttpModule, BsDropdownModule.forRoot(), TooltipModule.forRoot(), ModalModule.forRoot()],
+    exports: [BsDropdownModule, TooltipModule, ModalModule],
+    declarations: [FileslistComponent, MainComponent, HeaderComponent],
+    providers: [RestTemplate, DataService, ApplicationService],
+    bootstrap: [HeaderComponent, MainComponent]
 })
 
 export class AppModule {

@@ -1,5 +1,4 @@
 import {ApplicationService} from "../services/application.service";
-import {DataService} from "../services/data.service";
 import {FileStatisticPage} from "../models/file-statistic-page.model";
 
 export abstract class AbstractDataComponent {
@@ -22,7 +21,15 @@ export abstract class AbstractDataComponent {
         this.applicationService.getDataService.pageSort = value;
     }
 
-    pageAscend(value: boolean) {
-        this.applicationService.getDataService.pageAscend = value;
+    getPageSort(): string {
+        return this.applicationService.getDataService.pageSort;
+    }
+
+    changePageAscend() {
+        this.applicationService.getDataService.changePageAscend();
+    }
+
+    getPageAscend(): boolean {
+        return this.applicationService.getDataService.pageAscend;
     }
 }

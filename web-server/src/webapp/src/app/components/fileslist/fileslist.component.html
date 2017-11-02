@@ -4,12 +4,35 @@
             <table class="table">
                 <thead>
                 <tr class="active">
-                    <th>Name:</th>
-                    <th>Upload date:</th>
-                    <th>Total lines:</th>
-                    <th>Shortest word:</th>
-                    <th>Longest word:</th>
-                    <th>Average word length:</th>
+                    <th>
+                        <a (click)="sortStatisticsBy('filename')">Name:</a>
+                        <span *ngIf="getPageSort() == 'filename'" [ngClass]="{'glyphicon-sort-by-alphabet': getPageAscend(), 'glyphicon-sort-by-alphabet-alt': !getPageAscend()}" class="glyphicon"></span>
+                    </th>
+                    <th>
+                    <a (click)="sortStatisticsBy('uploadDate')">Upload date:</a>
+                    <span *ngIf="getPageSort() == 'uploadDate'"
+                          [ngClass]="{'glyphicon-sort-by-order': getPageAscend(), 'glyphicon-sort-by-order-alt': !getPageAscend()}" class="glyphicon"></span>
+                    </th>
+                    <th>
+                        <a (click)="sortStatisticsBy('size')">Total lines:</a>
+                        <span *ngIf="getPageSort() == 'size'"
+                              [ngClass]="{'glyphicon-sort-by-order': getPageAscend(), 'glyphicon-sort-by-order-alt': !getPageAscend()}" class="glyphicon"></span>
+                    </th>
+                    <th>
+                        <a (click)="sortStatisticsBy('shortestWord')">Shortest word:</a>
+                        <span *ngIf="getPageSort() == 'shortestWord'"
+                              [ngClass]="{'glyphicon-sort-by-attributes': getPageAscend(), 'glyphicon-sort-by-attributes-alt': !getPageAscend()}" class="glyphicon"></span>
+                    </th>
+                    <th>
+                        <a (click)="sortStatisticsBy('longestWord')">Longest word:</a>
+                        <span *ngIf="getPageSort() == 'longestWord'"
+                              [ngClass]="{'glyphicon-sort-by-attributes': getPageAscend(), 'glyphicon-sort-by-attributes-alt': !getPageAscend()}" class="glyphicon"></span>
+                    </th>
+                    <th>
+                        <a (click)="sortStatisticsBy('averageWordLength')">Average word length:</a>
+                        <span *ngIf="getPageSort() == 'averageWordLength'"
+                              [ngClass]="{'glyphicon-sort-by-order': getPageAscend(), 'glyphicon-sort-by-order-alt': !getPageAscend()}" class="glyphicon"></span>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -29,7 +52,7 @@
     </div>
 </div>
 
-<div id="footer">
+<div id="footer" class="text-center">
     <ul class="pagination" *ngIf="pageData.pageSize>0">
         <li [ngClass]="{'disabled': page.current}" *ngFor="let page of getPagination()">
             <a (click)="pageNo(page.pageNo)">{{page.name}}</a>

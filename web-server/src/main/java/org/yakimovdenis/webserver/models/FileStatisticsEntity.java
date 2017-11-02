@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.*;
 
 @Data
@@ -38,5 +37,6 @@ public class FileStatisticsEntity {
     private Date uploadDate;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "fileStatisticsEntity")
     @JsonView(JacksonView.FullStatistic.class)
-    private Set<LineStatisticsResultEntity> lineStatistics = new HashSet<>();
+    @OrderBy("id ASC")
+    private SortedSet<LineStatisticsResultEntity> lineStatistics = new TreeSet<>();
 }
